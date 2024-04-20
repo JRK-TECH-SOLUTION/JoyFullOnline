@@ -14,5 +14,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('administrator.dashboard');
+});
+Route::get('/product', function () {
+    return view('administrator.product');
+});
+Route::get('/systemuser', function () {
+    return view('administrator.systemuser');
+});
+Route::get('/sms', function () {
+    return view('administrator.sms');
+});
+Route::get('/customer', function () {
+    return view('administrator.customer');
+});
+Route::get('/maintenance', function () {
+    return view('administrator.maintenance');
+});
+Route::get('/order', function () {
+    return view('administrator.order');
 });
