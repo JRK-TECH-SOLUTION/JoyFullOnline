@@ -26,7 +26,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-header">
                         <h5 class="m-0">Product Information
-                            <button type="button" class="btn btn-primary btn-sm float-right"><i class="fa fa-plus" aria-hidden="true"></i>  Add Product</button>
+                            <button type="button" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#addProduct"><i class="fa fa-plus" aria-hidden="true"></i>  Add Product</button>
                         </h5>
 
                     </div>
@@ -71,4 +71,5 @@
       </div>
     </section>
 </div>
+@include('administrator.modal')
 @include('administrator.includes.footer')
