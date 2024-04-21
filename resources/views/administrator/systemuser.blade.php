@@ -1,5 +1,5 @@
 @include('administrator.includes.header')
-@include('administrator.includes.loader')
+
 @include('administrator.includes.nav')
 @include('administrator.includes.sidebar')
 <div class="content-wrapper">
@@ -18,6 +18,7 @@
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
+
 
     <section class="content">
       <div class="container-fluid">
@@ -40,25 +41,32 @@
                                             <th>Email Address</th>
                                             <th>Phone Number</th>
                                             <th>Role</th>
-                                            <th>Status</th>
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>joe@eail.com</td>
-                                            <td>09000000000</td>
-                                            <td>Administrator</td>
-                                            <td>Active</td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-sm">  Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"> Delete</a>
-                                            </td>
+                                        @if(count($systemusers) > 0)
+                                            @foreach($systemusers as $user)
+                                            <tr>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->phone_number }}</td>
+                                                <td>{{ $user->role }}</td>
 
-                                        </tr>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm" onclick="deleteUser(this)" data-id="{{$user->id}}">Delete</button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="6" class="text-center">No record found</td>
+                                            </tr>
+                                        @endif
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -68,5 +76,80 @@
       </div>
     </section>
 </div>
+
 @include('administrator.modal')
+@include('administrator.includes.script')
+<script>
+$(function() {
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    @if(session('success'))
+    $(document).Toasts('create', {
+        class: 'bg-success',
+        title: 'Successfully Added',
+        body: 'System User has been added successfully'
+    });
+    @endif
+    @if(session('error'))
+        $(document).Toasts('create', {
+            class: 'bg-danger',
+            title: 'Error',
+            body: '{{ session('error') }}'
+        });
+    @endif
+
+
+});
+</script>
+<script>
+
+    function deleteUser(e){
+        var userId = $(e).data('id');
+        //swal confirm
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to delete this user?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/deleteUser/'+userId,
+                    type: 'GET',
+                    success: function(response){
+                        @if(session('success'))
+                            $(document).Toasts('create', {
+                                class: 'bg-success',
+                                title: 'Successfully Deleted',
+                                body: 'System User has been deleted successfully'
+                            });
+                            setTimeout(function(){
+                                location.reload();
+                            }, 2000);
+
+                        @endif
+                        @if(session('error'))
+                            $(document).Toasts('create', {
+                                class: 'bg-danger',
+                                title: 'Error',
+                                body: '{{ session('error') }}'
+                            });
+                        @endif
+                    }
+                });
+            }
+        });
+    }
+
+
+
+</script>
 @include('administrator.includes.footer')

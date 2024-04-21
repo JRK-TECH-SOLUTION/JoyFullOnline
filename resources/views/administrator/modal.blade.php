@@ -8,30 +8,30 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="" method="post" autocomplete="OFF">
+              <form action="addUser" method="post" autocomplete="OFF">
                 @csrf
                 <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Full Name</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Full Name">
+                        <input type="text" class="form-control" id="inputEmail3" name="name" placeholder="Full Name">
                         </div>
                   </div>
                   <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Email Address</label>
                         <div class="col-sm-9">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email Address">
+                        <input type="email" class="form-control" id="inputEmail3" name="email" placeholder="Email Address">
                         </div>
                   </div>
                   <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Phone Number</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Phone Number">
+                        <input type="text" class="form-control" id="inputEmail3" name="phone_number" placeholder="Phone Number">
                         </div>
                    </div>
                      <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Role</label>
                         <div class="col-sm-9">
-                        <select class="form-control">
+                        <select class="form-control" name="role">
                             <option value="Owner">Owner</option>
                             <option value="Kitchen">Staff</option>
                         </select>
@@ -41,7 +41,7 @@
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="btn btn-primary float-right">Save Account</button></form>
+              <button type="submit" class="btn btn-primary float-right">Save Account</button></form>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -49,7 +49,7 @@
         <!-- /.modal-dialog -->
 </div>
 
-<
+
 <!---- modal for product ---->
 <div class="modal fade" id="addProduct">
         <div class="modal-dialog modal-lg">

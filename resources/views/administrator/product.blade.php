@@ -1,5 +1,4 @@
 @include('administrator.includes.header')
-@include('administrator.includes.loader')
 @include('administrator.includes.nav')
 @include('administrator.includes.sidebar')
 <div class="content-wrapper">
@@ -72,4 +71,5 @@
     </section>
 </div>
 @include('administrator.modal')
+@include('administrator.includes.script')
 @include('administrator.includes.footer')
