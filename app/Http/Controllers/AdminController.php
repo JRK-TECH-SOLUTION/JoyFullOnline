@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 use App\Models\SystemUser;
+use App\Models\productinformation;
+
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -68,6 +70,7 @@ class AdminController extends Controller
     }
 
     public function product(){
-        return view('administrator.product');
+        $products = productinformation::all();
+        return view('administrator.product', compact('products'));
     }
 }

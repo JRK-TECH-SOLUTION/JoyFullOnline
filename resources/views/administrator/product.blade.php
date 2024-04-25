@@ -46,19 +46,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Product Name</td>
-                                            <td>Product Description</td>
-                                            <td>Product Price</td>
-                                            <td>Product Quantity</td>
-                                            <td>Product Image</td>
-                                            <td>Product Category</td>
-                                            <td>Product Status</td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-sm">  Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"> Delete</a>
-                                            </td>
-                                        </tr>
+                                       @if (count($products) > 0)
+                                            @foreach ($products as $product)
+                                                <tr>
+                                                    <td>{{ $product->product_name }}</td>
+                                                    <td>{{ $product->product_description }}</td>
+                                                    <td>{{ $product->product_price }}</td>
+                                                    <td>{{ $product->product_quantity }}</td>
+                                                    <td><img src="{{ asset('storage/product_images/'.$product->product_image) }}" alt="{{ $product->product_name }}" class="img-thumbnail" width="100"></td>
+                                                    <td>{{ $product->category->category_name }}</td>
+                                                    <td>{{ $product->product_status }}</td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProduct" data-id="{{ $product->id }}" data-product_name="{{ $product->product_name }}" data-product_description="{{ $product->product_description }}" data-product_price="{{ $product->product_price }}" data-product_quantity="{{ $product->product_quantity }}" data-product_image="{{ $product->product_image }}" data-category_id="{{ $product->category_id }}" data-product_status="{{ $product->product_status }}">Edit</button>
+                                                        <button class="btn btn-danger btn-sm" onclick="deleteProduct(this)" data-id="{{ $product->id }}">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="8" class="text-center">No Product Available</td>
+                                            </tr>
+                                       @endif
                                     </tbody>
                                 </table>
                             </div>
