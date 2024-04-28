@@ -95,7 +95,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label" >Product Image</label>
                         <div class="col-sm-9">
-                        <input type="file" class="form-control" id="inputEmail3" name="productimage" placeholder="Product Image">
+                        <input type="file" class="form-control" id="inputEmail3" name="productimage" accept="image/*" placeholder="Product Image">
                         </div>
                     </div>
                     <div class="form-group row">

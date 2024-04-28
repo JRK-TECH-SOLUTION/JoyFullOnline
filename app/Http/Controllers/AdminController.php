@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\SystemUser;
 use App\Models\productinformation;
+use App\Models\smsAPI;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -74,12 +75,16 @@ class AdminController extends Controller
         return view('administrator.product', compact('products'));
     }
     public function addProduct(Request $request){
+
+
         $validator = Validator::make($request->all(), [
             'productname' => 'required|string|max:255',
             'productdescription' => 'required|string|max:255',
             'productprice' => 'required|numeric',
             'productquantity' => 'required|numeric',
             'productcategory' => 'required|string|max:255',
+            'productstatus' => 'required|string|max:255',
+
 
 
         ]);
@@ -89,40 +94,63 @@ class AdminController extends Controller
 
         }
 
-        //move the image to the public folder/uploads
 
-        $file = $request->file('productimage');
-
-        if ($file !== null) {
-            $imageName = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('uploads'), $imageName);
-
-        }
-
-
-
-
-        try {
-            // Create a new productinformation instance and save it to the database
-            $product = new productinformation;
+        try{
+        $product = new productinformation;
             $product->productname = $request->productname;
             $product->productdescription = $request->productdescription;
             $product->productprice = $request->productprice;
             $product->productquantity = $request->productquantity;
             $product->productcategory = $request->productcategory;
-            $product->productimage = $imageName;
+            $product->productstatus = $request->productstatus;
+            $product->productimage = "";
             $product->save();
 
             // Redirect back with success message
             return redirect()->back()->with('success', 'Product added successfully');
+
+
+
         } catch (\Exception $e) {
             // Log the exception for debugging purposes
             Log::error($e->getMessage());
 
             // Redirect back with error message
-            return redirect()->back()->with('error', 'An error occurred while adding the product. Please try again later.');
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
+
+    }
+
+    public function smsApi(){
+
+        //select all data from the smsapi table
+        $smsapi = smsAPI::all();
+        return view('administrator.sms', compact('smsapi'));
+    }
+
+    public function updateSMS(Request $request){
+        $validator = Validator::make($request->all(), [
+            'api_key' => 'required|string|max:255',
+            'sender_name' => 'required|string|max:255',
+            'link' => 'required|string|max:255',
+        ]);
+         // Check if validation fails
+         if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+
+        }
+
+
+        // Update the smsapi table with the new data
+        $smsapi = smsAPI::find(1);
+        $smsapi->api_key = $request->api_key;
+        $smsapi->sender_name = $request->sender_name;
+        $smsapi->link = $request->link;
+        $smsapi->save();
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'SMS API updated successfully');
 
     }
 }
