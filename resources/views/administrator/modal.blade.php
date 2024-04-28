@@ -61,30 +61,30 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="" method="post" autocomplete="OFF">
+              <form action="addProduct" method="post" autocomplete="OFF">
                 @csrf
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Name</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Product Name">
+                        <input type="text" class="form-control" id="inputEmail3" name="productname" placeholder="Product Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Description</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Product Description">
+                        <input type="text" class="form-control" id="inputEmail3" name="productdescription" placeholder="Product Description">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Price</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="Product Price">
+                        <input type="text" class="form-control" id="inputEmail3" name="productprice" placeholder="Product Price">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Category</label>
                         <div class="col-sm-9">
-                        <select class="form-control">
+                        <select class="form-control" name="productcategory">
                             <option value="Beverages">Beverages</option>
                             <option value="Appetizers">Appetizers</option>
                             <option value="Main Course">Main Course</option>
@@ -93,15 +93,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Product Image</label>
+                        <label for="inputEmail3" class="col-sm-3 col-form-label" >Product Image</label>
                         <div class="col-sm-9">
-                        <input type="file" class="form-control" id="inputEmail3" placeholder="Product Image">
+                        <input type="file" class="form-control" id="inputEmail3" name="productimage" placeholder="Product Image">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Status</label>
                         <div class="col-sm-9">
-                        <select class="form-control">
+                        <select class="form-control" name="productstatus">
                             <option value="Available">Available</option>
                             <option value="Not Available">Not Available</option>
                         </select>
@@ -110,7 +110,7 @@
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Quantity</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputEmail3" placeholder="Product Image">
+                            <input type="text" class="form-control" id="inputEmail3" name="productquantity" placeholder="Product Image">
                         </div>
                     </div>
 
@@ -119,7 +119,7 @@
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="btn btn-primary float-right">Save Product</button></form>
+              <button type="submit" class="btn btn-primary float-right">Save Product</button></form>
             </div>
           </div>
           <!-- /.modal-content -->

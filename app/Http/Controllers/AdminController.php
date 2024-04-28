@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\SystemUser;
 use App\Models\productinformation;
@@ -72,5 +72,57 @@ class AdminController extends Controller
     public function product(){
         $products = productinformation::all();
         return view('administrator.product', compact('products'));
+    }
+    public function addProduct(Request $request){
+        $validator = Validator::make($request->all(), [
+            'productname' => 'required|string|max:255',
+            'productdescription' => 'required|string|max:255',
+            'productprice' => 'required|numeric',
+            'productquantity' => 'required|numeric',
+            'productcategory' => 'required|string|max:255',
+
+
+        ]);
+        // Check if validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+
+        }
+
+        //move the image to the public folder/uploads
+
+        $file = $request->file('productimage');
+
+        if ($file !== null) {
+            $imageName = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('uploads'), $imageName);
+
+        }
+
+
+
+
+        try {
+            // Create a new productinformation instance and save it to the database
+            $product = new productinformation;
+            $product->productname = $request->productname;
+            $product->productdescription = $request->productdescription;
+            $product->productprice = $request->productprice;
+            $product->productquantity = $request->productquantity;
+            $product->productcategory = $request->productcategory;
+            $product->productimage = $imageName;
+            $product->save();
+
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Product added successfully');
+        } catch (\Exception $e) {
+            // Log the exception for debugging purposes
+            Log::error($e->getMessage());
+
+            // Redirect back with error message
+            return redirect()->back()->with('error', 'An error occurred while adding the product. Please try again later.');
+        }
+
+
     }
 }

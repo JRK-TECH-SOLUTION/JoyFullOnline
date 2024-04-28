@@ -18,6 +18,7 @@ Route::get('/systemuser', [AdminController::class, 'SystemUser']);
 Route::post('/addUser', [AdminController::class, 'addUser']);
 Route::get('/deleteUser/{id}', [AdminController::class, 'deleteUser']);
 Route::get('/product', [AdminController::class, 'product']);
+Route::post('/addProduct', [AdminController::class, 'addProduct']);
 // Route::get('/', function () {
 //     return view('administrator.dashboard');
 // });
