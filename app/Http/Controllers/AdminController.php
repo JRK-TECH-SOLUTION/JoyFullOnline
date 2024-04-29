@@ -84,6 +84,7 @@ class AdminController extends Controller
             'productquantity' => 'required|numeric',
             'productcategory' => 'required|string|max:255',
             'productstatus' => 'required|string|max:255',
+            ''
 
 
 
@@ -153,5 +154,5 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'SMS API updated successfully');
 
     }
-    
+
 }
