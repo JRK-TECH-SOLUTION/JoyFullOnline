@@ -61,7 +61,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="addProduct" method="post" autocomplete="OFF">
+              <form action="addProduct" method="post" autocomplete="OFF" enctype="multipart/form-data">
                 @csrf
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Product Name</label>

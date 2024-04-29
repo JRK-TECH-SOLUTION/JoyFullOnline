@@ -21,9 +21,11 @@ Route::post('/addUser', [AdminController::class, 'addUser']);
 Route::get('/deleteUser/{id}', [AdminController::class, 'deleteUser']);
 Route::get('/product', [AdminController::class, 'product']);
 Route::post('/addProduct', [AdminController::class, 'addProduct']);
+Route::get('/deleteProduct/{id}',[AdminController::class,'deleteProduct']);
 Route::get('/sms', [AdminController::class, 'smsApi']);
 Route::post('/updateSMS', [AdminController::class, 'updateSMS']);
 Route::get('/cdashboard',[customerController::class,'cdashboard']);
+
 Route::get('/',[SystemLoad::class,'index']);
 
 // Route::get('/', function () {

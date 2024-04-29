@@ -35,14 +35,14 @@
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Product Name</th>
-                                            <th>Product Description</th>
-                                            <th>Product Price</th>
-                                            <th>Product Quantity</th>
-                                            <th>Product Image</th>
-                                            <th>Product Category</th>
-                                            <th>Product Status</th>
-                                            <th>Product Action</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Image</th>
+                                            <th>Category</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,7 +53,7 @@
                                                     <td>{{ $product->productdescription }}</td>
                                                     <td>{{ $product->productprice }}</td>
                                                     <td>{{ $product->productquantity }}</td>
-                                                    <td></td>
+                                                    <td><img src="{{asset('uploads'.$product->productimage)}}" style="height:50px;width:50px;" alt=""></td>
                                                     <td>{{ $product->productcategory }}</td>
                                                     <td>{{ $product->productstatus }}</td>
                                                     <td>
@@ -109,12 +109,12 @@
     </script>
     <script>
 
-        function deleteUser(e){
+        function deleteProduct(e){
             var userId = $(e).data('id');
             //swal confirm
             Swal.fire({
                 title: 'Are you sure?',
-                text: "You want to delete this user?",
+                text: "You want to delete this product?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -123,7 +123,7 @@
                 }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/deleteUser/'+userId,
+                        url: '/deleteProduct/'+userId,
                         type: 'GET',
                         success: function(response){
                             @if(session('success'))
