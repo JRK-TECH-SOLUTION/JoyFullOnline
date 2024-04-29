@@ -153,4 +153,5 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'SMS API updated successfully');
 
     }
+    
 }

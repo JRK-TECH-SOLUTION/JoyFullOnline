@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\customerController;
+use App\Http\Controllers\SystemLoad;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +15,7 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [AdminController::class, 'dashboard']);
+Route::get('/dashbaord', [AdminController::class, 'dashboard']);
 Route::get('/systemuser', [AdminController::class, 'SystemUser']);
 Route::post('/addUser', [AdminController::class, 'addUser']);
 Route::get('/deleteUser/{id}', [AdminController::class, 'deleteUser']);
@@ -21,6 +23,9 @@ Route::get('/product', [AdminController::class, 'product']);
 Route::post('/addProduct', [AdminController::class, 'addProduct']);
 Route::get('/sms', [AdminController::class, 'smsApi']);
 Route::post('/updateSMS', [AdminController::class, 'updateSMS']);
+Route::get('/cdashboard',[customerController::class,'cdashboard']);
+Route::get('/',[SystemLoad::class,'index']);
+
 // Route::get('/', function () {
 //     return view('administrator.dashboard');
 // });
