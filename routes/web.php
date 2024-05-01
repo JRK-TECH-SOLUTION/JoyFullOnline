@@ -38,6 +38,10 @@ Route::get('/cdashbaord',[customerController::class,'dashboard']);
 Route::get('/corderbycustomer',[customerController::class,'corderbycustomer']);
 
 Route::get('/',[SystemLoad::class,'index']);
+Route::get('/login',[SystemLoad::class,'login']);
+Route::get('/createaccount',[SystemLoad::class,'createaccount']);
+Route::post('/create',[SystemLoad::class,'accountcreation']);
+Route::get('/verify',[SystemLoad::class,'verify']);
 
 // Route::get('/', function () {
 //     return view('administrator.dashboard');

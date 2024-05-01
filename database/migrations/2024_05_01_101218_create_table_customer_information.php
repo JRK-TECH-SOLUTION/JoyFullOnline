@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('PhoneNumber');
             $table->string('Address');
             $table->string('Password');
-            $table->enum('Status', ['Active', 'Inactive'])->default('Active');
+            $table->enum('Status', ['Active', 'Inactive','Not'])->default('Not');
+            $table->string('VerificationCode');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
