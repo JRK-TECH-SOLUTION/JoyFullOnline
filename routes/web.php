@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\customerController;
+use App\Http\Controllers\KitchenStaff;
 use App\Http\Controllers\SystemLoad;
 
 /*
@@ -24,7 +25,17 @@ Route::post('/addProduct', [AdminController::class, 'addProduct']);
 Route::get('/deleteProduct/{id}',[AdminController::class,'deleteProduct']);
 Route::get('/sms', [AdminController::class, 'smsApi']);
 Route::post('/updateSMS', [AdminController::class, 'updateSMS']);
-Route::get('/cdashboard',[customerController::class,'cdashboard']);
+Route::get('/orderbycustomer',[AdminController::class,'order']);
+Route::get('/customer', [AdminController::class, 'customer']);
+Route::get('/maintenance', [AdminController::class, 'maintenance']);
+
+
+//kitche staff
+Route::get('/kdashboard',[KitchenStaff::class,'dashboard']);
+Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
+
+Route::get('/cdashbaord',[customerController::class,'dashboard']);
+Route::get('/corderbycustomer',[customerController::class,'corderbycustomer']);
 
 Route::get('/',[SystemLoad::class,'index']);
 

@@ -1,5 +1,5 @@
 @include('administrator.includes.header')
-@include('administrator.includes.loader')
+
 @include('administrator.includes.nav')
 @include('administrator.includes.sidebar')
 <div class="content-wrapper">
@@ -37,26 +37,28 @@
                                     <thead>
                                         <tr>
                                             <th>Full Name</th>
-                                            <th>Email Address</th>
-                                            <th>Phone Number</th>
-                                            <th>Role</th>
+                                            <th>Address</th>
+                                            <th>Order ID</th>
+                                            <th>Amount</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Payment Type</th>
+                                            <th>Order Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>joe@eail.com</td>
-                                            <td>09000000000</td>
-                                            <td>Administrator</td>
-                                            <td>Active</td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-sm">  Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"> Delete</a>
-                                            </td>
 
-                                        </tr>
+                                            @foreach($orders as $order)
+                                                <tr>
+                                                    <td>{{$order->FullName}}</td>
+                                                    <td>{{$order->Address}}</td>
+                                                    <td>{{$order->order_id}}</td>
+                                                    <td>{{$order->total}}</td>
+                                                    <td>{{$order->status}}</td>
+                                                    <td>{{$order->payment_method}}</td>
+                                                </tr>
+                                            @endforeach
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -68,4 +70,5 @@
       </div>
     </section>
 </div>
+@include('administrator.includes.script')
 @include('administrator.includes.footer')

@@ -1,5 +1,4 @@
 @include('administrator.includes.header')
-@include('administrator.includes.loader')
 @include('administrator.includes.nav')
 @include('administrator.includes.sidebar')
 <div class="content-wrapper">
@@ -42,16 +41,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($maintenance as $maintenance )
                                         <tr>
-                                            <td>Kithcen Staff</td>
-                                            <td>On-Going</td>
-
+                                            <td>{{ $maintenance->affected}}</td>
+                                            <td>{{ $maintenance->status }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-primary btn-sm"> Off Maintenance</a>
-
+                                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editMaintenance" data-id="{{ $maintenance->id }}" >Update</button>
                                             </td>
 
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -63,4 +61,6 @@
       </div>
     </section>
 </div>
+
+@include('administrator.includes.script')
 @include('administrator.includes.footer')

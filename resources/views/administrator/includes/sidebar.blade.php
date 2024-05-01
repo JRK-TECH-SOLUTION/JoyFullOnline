@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="order" class="nav-link">
+            <a href="orderbycustomer" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Customer Orders

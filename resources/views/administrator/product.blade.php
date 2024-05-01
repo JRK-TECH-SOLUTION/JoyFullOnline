@@ -93,7 +93,7 @@
         $(document).Toasts('create', {
             class: 'bg-success',
             title: 'Successfully Added',
-            body: 'System User has been added successfully'
+            body: '{{ session('success') }}'
         });
         @endif
         @if(session('error'))

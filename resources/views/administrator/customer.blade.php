@@ -1,5 +1,5 @@
 @include('administrator.includes.header')
-@include('administrator.includes.loader')
+
 @include('administrator.includes.nav')
 @include('administrator.includes.sidebar')
 <div class="content-wrapper">
@@ -39,24 +39,28 @@
                                             <th>Full Name</th>
                                             <th>Email Address</th>
                                             <th>Phone Number</th>
-                                            <th>Role</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>joe@eail.com</td>
-                                            <td>09000000000</td>
-                                            <td>Administrator</td>
-                                            <td>Active</td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary btn-sm">  Edit</a>
-                                                <a href="#" class="btn btn-danger btn-sm"> Delete</a>
-                                            </td>
-
-                                        </tr>
+                                        @if(count($customers) > 0)
+                                            @foreach($customers as $customer)
+                                            <tr>
+                                                <td>{{ $customer->FullName }}</td>
+                                                <td>{{ $customer->Email }}</td>
+                                                <td>{{ $customer->PhoneNumber }}</td>
+                                                <td>{{ $customer->Status }}</td>
+                                                <td>
+                                                    <button class="btn btn-danger btn-sm" onclick="deleteUser(this)" data-id="{{$customer->id}}">Delete</button>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="5">No record found</td>
+                                            </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -68,4 +72,5 @@
       </div>
     </section>
 </div>
+@include('administrator.includes.script')
 @include('administrator.includes.footer')

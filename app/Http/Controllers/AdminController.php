@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\SystemUser;
 use App\Models\productinformation;
+use App\Models\orderinformation;
+use App\Models\customerInformation;
+use App\Models\maintenanceInformation;
 use App\Models\smsAPI;
 
 use Illuminate\Support\Facades\Hash;
@@ -181,6 +184,24 @@ class AdminController extends Controller
 
         // Redirect back with success message
         return redirect()->back()->with('success', 'SMS API updated successfully');
+
+    }
+    function order(){
+        //select all data from the orderinformation table inner join by customerInformation table
+        $orders = orderinformation::join('customerInformation', 'orderinformation.customer_id', '=', 'customerInformation.id');
+        return view('administrator.order', compact('orders'));
+
+
+
+    }
+    public function customer(){
+        $customers = customerInformation::all();
+        return view('administrator.customer', compact('customers'));
+
+    }
+    public function maintenance(){
+        $maintenance = maintenanceInformation::all();
+        return view('administrator.maintenance', compact('maintenance'));
 
     }
 
