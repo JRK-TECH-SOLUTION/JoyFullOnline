@@ -26,9 +26,18 @@
     </div>
     <div class="card-body">
       <p class="login-box-msg">You are only one step a way</p>
-      <form action="login.html" method="post">
+      <form action="verifyNumber" method="post">
+        @csrf
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Verification Code">
+            <input type="text" class="form-control" name="phone_number" placeholder="Verification Code" value="{{$phoneNumber}}" readonly>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-phone"></span>
+              </div>
+            </div>
+          </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="verification_code" placeholder="Verification Code">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -51,8 +60,7 @@
     <!-- /.login-card-body -->
   </div>
 </div>
-<!-- /.login-box -->
-<button class="test">test</button>
+
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
@@ -66,20 +74,33 @@
 <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script>
 <script>
     $(function() {
-        $('.test').click(function() {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000
             });
-            $(document).Toasts('create', {
-                class: 'bg-success',
-                title: 'Successfully Added',
-                body: 'System User has been added successfully'
-            });
 
-        });
+                @if((session('status')) == 'success')
+                    $(document).Toasts('create', {
+                        class: 'bg-success',
+                        title: 'Successfully Added',
+                        body: 'System User has been added successfully'
+                    });
+                    //unset the session
+                    {{ session()->forget('status') }}
+                @else
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        title: 'Error',
+                        body: '{{ session('error') }}'
+                    });
+                    //unset the session
+                    {{ session()->forget('error') }}
+                @endif
+
+
+
 
     });
 </script>

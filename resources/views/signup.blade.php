@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css')}}">
+
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -27,7 +28,7 @@
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="create" method="post">
+      <form method="POST" action="accountcreation">
         @csrf
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="fullname"  placeholder="Full name">
@@ -46,7 +47,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-            <input type="tel" maxlength="11" class="form-control" name="phonenumber" placeholder="Phone Number">
+            <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fa fa-phone"></span>
@@ -54,7 +55,7 @@
             </div>
         </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="address" placeholder="Address">
+            <input type="text" class="form-control" name="address" placeholder="Address" required>
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fa fa-map-marker"></span>
@@ -62,7 +63,7 @@
             </div>
           </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -70,7 +71,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="confirmpassword" placeholder="Retype password">
+          <input type="password" class="form-control" name="confirmpassword" placeholder="Retype password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -80,7 +81,7 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree" required>
               <label for="agreeTerms">
                I agree to the <a href="#">terms</a>
               </label>
@@ -88,11 +89,10 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>  </form>
+            <button class="btn btn-primary btn-block">Register</button>  </form>
           </div>
           <!-- /.col -->
         </div>
-
 
 
 
@@ -117,22 +117,33 @@
 
 <script>
     $(function() {
-        $('.test').click(function() {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000
             });
-            @if(session('error'))
-                $(document).Toasts('create', {
-                    class: 'bg-danger',
-                    title: 'Error',
-                    body: '{{ session('error') }}'
-                });
-            @endif
 
-        });
+                @if((session('status')) == 'success')
+                    $(document).Toasts('create', {
+                        class: 'bg-success',
+                        title: 'Successfully Added',
+                        body: 'System User has been added successfully'
+                    });
+                    //unset the session
+                    {{ session()->forget('status') }}
+                @else
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        title: 'Error',
+                        body: '{{ session('error') }}'
+                    });
+                    //unset the session
+                    {{ session()->forget('error') }}
+                @endif
+
+
+
 
     });
 </script>

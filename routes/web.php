@@ -34,15 +34,17 @@ Route::get('/maintenance', [AdminController::class, 'maintenance']);
 Route::get('/kdashboard',[KitchenStaff::class,'dashboard']);
 Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
 
-Route::get('/cdashbaord',[customerController::class,'dashboard']);
+Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
 Route::get('/corderbycustomer',[customerController::class,'corderbycustomer']);
 
 Route::get('/',[SystemLoad::class,'index']);
-Route::get('/login',[SystemLoad::class,'login']);
-Route::get('/createaccount',[SystemLoad::class,'createaccount']);
+Route::get('/login',[SystemLoad::class,'login'])->name('login');
+Route::post('/applylogin',[SystemLoad::class,'applylogin']);
+Route::get('/createaccount',[SystemLoad::class,'createaccount'])->name('createaccount');
 Route::post('/create',[SystemLoad::class,'accountcreation']);
-Route::get('/verify',[SystemLoad::class,'verify']);
-
+route::post('/accountcreation',[SystemLoad::class,'accountcreation']);
+Route::get('/verify', [SystemLoad::class, 'verify'])->name('verify');
+Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNumber');
 // Route::get('/', function () {
 //     return view('administrator.dashboard');
 // });

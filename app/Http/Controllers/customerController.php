@@ -12,9 +12,16 @@ use App\Models\smsAPI;
 class customerController extends Controller
 {
     public function dashboard(){
+        //get the customer id fromt the session
+        $customer_id = session('customer_id');
+        //get the customer information from the database
+        $customer = customerInformation::where('id', $customer_id)->first();
+        //get the maintenance information from the database
+
         //select all products from the database
         $products = productinformation::all();
-        return view('users.dashboard', compact('products'));
+        return view('users.dashboard', compact('customer', 'products'));
+
     }
     public function corderbycustomer(){
         $orders = orderinformation::all();

@@ -1,0 +1,42 @@
+{
+    "name": "humans/semaphore-sms",
+    "description": "A Semaphore SMS client with Laravel integration.",
+    "type": "library",
+    "keywords": ["laravel", "sms", "semaphore", "notification"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jaggy Gauran",
+            "email": "jaggy@humans.ph"
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "symfony/http-client": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Humans\\Semaphore\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Humans\\Semaphore\\Laravel\\ServiceProvider"
+            ],
+            "aliases": {
+                "Semaphore": "Humans\\Semaphore\\Laravel\\Facades\\Semaphore"
+            }
+        }
+    }
+}
