@@ -42,7 +42,7 @@ Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
 
 Route::group(['role.user'], function () {
     Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
-    Route::get('/corderbycustomer',[customerController::class,'corderbycustomer']);
+    Route::get('/corderbycustomer',[customerController::class,'corderbycustomer'])->name('mycart');
     Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
 });
   

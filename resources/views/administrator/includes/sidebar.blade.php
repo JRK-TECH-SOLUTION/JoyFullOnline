@@ -70,23 +70,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-header">Miscellaneous</li>
-          <li class="nav-item">
-            <a href="sms" class="nav-link">
-              <i class="nav-icon fas fa-sms"></i>
-              <p>
-                SMS Api
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="maintenance" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
-              <p>
-                Maintenance
-              </p>
-            </a>
-          </li>
+          
           <li class="nav-header">Profile</li>
           <li class="nav-item">
             <a href="profile" class="nav-link">
@@ -96,9 +80,6 @@
               </p>
             </a>
           </li>
-
-
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

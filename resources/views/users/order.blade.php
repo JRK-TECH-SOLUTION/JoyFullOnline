@@ -31,7 +31,43 @@
 
                     </div>
                     <div class="card-body">
+                      <table class="table table-hover table-stripped table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Item</th>
+                              <th>Image</th>
+                              <th>Price</th>
+                              <th>Quantity</th>
+                              <th>Total</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!--- if cart is empty -->
+                            @if($corderbycustomer->count() == 0)
+                              <tr>
+                                <td colspan="6" class="text-center">Cart is Empty</td>
+                              </tr>
+                            @else
+                              @foreach($corderbycustomer as $c)
+                              <tr>
+                                <td>{{$c->productname}}</td>
+                                <td class="text-center"><img src="{{asset('uploads'.$c->productimage)}}" class="img-thumbnail" width="150"></td>
+                                <td>{{$c->productprice}}</td>
+                                <td>{{$c->quantity}}</td>
+                                <td>{{$c->total}}</td>
+                                <td class="text-center">
+                                  <a href="{{url('editcartItem/'.$c->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                  
+                                  <a href="{{url('editcartItem/'.$c->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                                  <a href="{{url('editcartItem/'.$c->id)}}" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                </td>
+                              @endforeach
+                            @endif
 
+                          </tbody>
+                       
+                      </table>
                     </div>
                 </div>
             </div>
