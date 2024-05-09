@@ -24,7 +24,8 @@
         <div class="row">
             @foreach ($products as $products)
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3 food-item">
-                <form method="post" action="">
+                <form method="post" action="addtocartItem">
+                  @csrf
                     <input type="hidden" name="item_name" value="{{$products->productname}}">
                     <input type="hidden" name="item_price" value="{{$products->productprice}}">
                     <input type="hidden" name="item_id" value="{{$products->id}}">

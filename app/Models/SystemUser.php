@@ -8,9 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class SystemUser extends Model
+class SystemUser extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    protected $table = 'system_users';
+
     protected $fillable = [
         'name', 'email', 'password',
     ];

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use App\Models\customerInformation;
+
 use App\Models\SystemUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,6 +32,7 @@ class SystemLoad extends Controller
             'email' => 'required|email|unique:system_users,email',
             'password' => 'required|string|min:8',
             'confirmpassword' => 'required|string|same:password',
+            'phonenumber' => 'required|numeric|unique:system_users,PhoneNumber',
             'terms' => 'required',
             'address' => 'required|string|max:255',
         ]);
@@ -52,7 +53,7 @@ class SystemLoad extends Controller
                 'Your verification code is ' . $verification_code . ''
             );
             // Create a new SystemUser instance and save it to the database
-            $user = new customerInformation();
+            $user = new SystemUser();
             $user->FullName = $request->fullname;
             $user->Email = $request->email;
             $user->PhoneNumber = $request->phonenumber;
@@ -81,7 +82,7 @@ class SystemLoad extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with('error', $validator->errors()->first());
         }
-        $user = customerInformation::where('PhoneNumber', $request->phone_number)->first();
+        $user = SystemUser::where('PhoneNumber', $request->phone_number)->first();
         if ($user->VerificationCode == $request->verification_code) {
             $user->email_verified_at = now();
             $user->Status = 'Active';
@@ -92,37 +93,63 @@ class SystemLoad extends Controller
         return redirect()->back()->with('error', 'Invalid verification code. Please try again.');
     }
     public function applylogin(Request $request){
-
-        $user = customerInformation::where('Email', $request->email)->first();
-        if ($user) {
-            if (Hash::check($request->password, $user->Password)) {
-
-                $userid = $user->id;
-                $role='customer';
-                // add the session id
-                session(['user_id' => $userid]);
-                return redirect()->route('cdashbaord')->with('success', 'Login successful!');
-            }else{
-                $systemuser = SystemUser::where('email', $request->email)->first();
-                if ($systemuser) {
-                    if (Hash::check($request->password, $systemuser->password)) {
-
-                        $role = $systemuser->role;
-                        if($role=='Owner'){
-                            Auth::login($systemuser);
-                            return redirect()->route('cdashboard')->with('success', 'Login successful!');
-                        }else if($role == 'KitchenStaff'){
-                            Auth::login($systemuser);
-                            return redirect()->route('kdashboard')->with('success', 'Login successful!');
-
-                        }
-
-                    }
-                }
-            }
-            return redirect()->back()->with('error', 'Invalid password. Please try again.');
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
         }
-        return redirect()->back()->with('error', 'Invalid email. Please try again.');
+        
+        $user = SystemUser::where('Email', $request->email)->first();
+        if (!$user) {
+            return redirect()->back()->with('error', 'Email not found. Please try again.');
+        }
+       //check if the password is correct
 
+        //display the get password 
+       
+        // verify if the password from the request matches the hashed password in the database
+        if (!Hash::check($request->password, $user->Password)) {
+            return redirect()->back()->with('error', 'Invalid password. Please try again.');
+        }else{
+            Auth::login($user);
+            //get the role
+            $role = $user->role;
+            switch ($role) {
+                case 'Owner':
+                    return redirect()->route('dashboard');
+                    break;
+                case 'Kithen':
+                    return redirect()->route('kitchen.dashboard');
+                    break;
+                case 'User':
+                    return redirect()->route('cdashbaord');
+                    break;
+                default:
+                    return redirect()->route('login')->with('error', 'Invalid role. Please try again.');
+                    break;
+            }
+        }
+
+        // if (!Hash::check($request->password, $user->Password)) {
+        //     return redirect()->back()->with('error', 'Invalid password. Please try again.');
+        // }
+        Auth::login($user);
+        //get the role
+        $role = $user->Role;
+
+        
+
+
+//$2y$10$z7VVTQz6n9yi1ax1OoL/x.GOe9H/rvlsCDnSlY/5PMx9DqddLERsm
+       
+
+       
     }
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('welcome');
+    }
+    
 }

@@ -14,7 +14,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Name of Admin</a>
+          <a href="#" class="d-block">{{Auth::user()->FullName}}</a>
         </div>
       </div>
 

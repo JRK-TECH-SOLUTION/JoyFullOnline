@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\KitchenStaff;
 use App\Http\Controllers\SystemLoad;
+use App\Http\Middleware\CheckRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,10 @@ use App\Http\Controllers\SystemLoad;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/dashbaord', [AdminController::class, 'dashboard']);
+
+Route::group(['role.admin'], function () {
+
+Route::get('/dashbaord', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/systemuser', [AdminController::class, 'SystemUser']);
 Route::post('/addUser', [AdminController::class, 'addUser']);
 Route::get('/deleteUser/{id}', [AdminController::class, 'deleteUser']);
@@ -28,23 +32,36 @@ Route::post('/updateSMS', [AdminController::class, 'updateSMS']);
 Route::get('/orderbycustomer',[AdminController::class,'order']);
 Route::get('/customer', [AdminController::class, 'customer']);
 Route::get('/maintenance', [AdminController::class, 'maintenance']);
+});
+
 
 
 //kitche staff
 Route::get('/kdashboard',[KitchenStaff::class,'dashboard']);
 Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
 
-Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
-Route::get('/corderbycustomer',[customerController::class,'corderbycustomer']);
+Route::group(['role.user'], function () {
+    Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
+    Route::get('/corderbycustomer',[customerController::class,'corderbycustomer']);
+    Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
+});
+  
 
-Route::get('/',[SystemLoad::class,'index']);
-Route::get('/login',[SystemLoad::class,'login'])->name('login');
-Route::post('/applylogin',[SystemLoad::class,'applylogin']);
-Route::get('/createaccount',[SystemLoad::class,'createaccount'])->name('createaccount');
-Route::post('/create',[SystemLoad::class,'accountcreation']);
-route::post('/accountcreation',[SystemLoad::class,'accountcreation']);
-Route::get('/verify', [SystemLoad::class, 'verify'])->name('verify');
-Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNumber');
+
+Route::group(['role.visitor'], function () {
+    Route::get('/',[SystemLoad::class,'index'])->name('welcome');
+    Route::get('/login',[SystemLoad::class,'login'])->name('login');
+    Route::post('/applylogin',[SystemLoad::class,'applylogin']);
+    Route::get('/createaccount',[SystemLoad::class,'createaccount'])->name('createaccount');
+    Route::post('/create',[SystemLoad::class,'accountcreation']);
+    route::post('/accountcreation',[SystemLoad::class,'accountcreation']);
+    Route::get('/verify', [SystemLoad::class, 'verify'])->name('verify');
+    Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNumber');
+});
+
+Route::get('/logout',[SystemLoad::class,'logout']);
+
+
 // Route::get('/', function () {
 //     return view('administrator.dashboard');
 // });

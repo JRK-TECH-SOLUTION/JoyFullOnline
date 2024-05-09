@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('system_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('phone_number');
+            $table->string('FullName');
+            $table->string('Email');
+            $table->string('PhoneNumber');
+            $table->string('Address');
+            $table->string('Password');
             // add enum for role
-            $table->enum('role', ['Owner', 'Kitchen'])->default('kitchen');
+            $table->enum('role', ['Owner', 'Kitchen','User'])->default('User');
+            $table->string('VerificationCode')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->enum('Status', ['Active', 'Inactive'])->default('Inactive');
             $table->rememberToken();
             $table->timestamps();
         });

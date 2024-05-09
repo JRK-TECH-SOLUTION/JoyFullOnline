@@ -46,9 +46,9 @@ class AdminController extends Controller
         try {
             // Create a new SystemUser instance and save it to the database
             $systemuser = new SystemUser;
-            $systemuser->name = $request->name;
-            $systemuser->email = $request->email;
-            $systemuser->phone_number = $request->phone_number;
+            $systemuser->name = $request->FullName;
+            $systemuser->email = $request->Email;
+            $systemuser->phone_number = $request->PhoneNumber;
             $systemuser->role = $request->role;
             $systemuser->password = $password;
             $systemuser->save();
