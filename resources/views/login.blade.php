@@ -87,37 +87,33 @@
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 <!-- Toastr -->
 <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script>
+
 <script>
-    $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000
-            });
+  $(function() {
+      var Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+      });
 
-                @if((session('status')) == 'success')
-                    $(document).Toasts('create', {
-                        class: 'bg-success',
-                        title: 'Successfully Added',
-                        body: 'System User has been added successfully'
-                    });
-                    //unset the session
-                    {{ session()->forget('status') }}
-                @else
-                    $(document).Toasts('create', {
-                        class: 'bg-danger',
-                        title: 'Error',
-                        body: '{{ session('error') }}'
-                    });
-                    //unset the session
-                    {{ session()->forget('error') }}
-                @endif
+      @if(session('success'))
+      $(document).Toasts('create', {
+          class: 'bg-success',
+          title: 'Successfully Added',
+          body: '{{ session('success') }}'
+      });
+      @endif
+      @if(session('error'))
+          $(document).Toasts('create', {
+              class: 'bg-danger',
+              title: 'Error',
+              body: '{{ session('error') }}'
+          });
+      @endif
 
 
-
-
-    });
-</script>
+  });
+  </script>
 </body>
 </html>
