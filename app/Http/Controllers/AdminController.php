@@ -11,6 +11,7 @@ use App\Models\orderinformation;
 use App\Models\customerInformation;
 use App\Models\maintenanceInformation;
 use App\Models\smsAPI;
+use Humans\Semaphore\Laravel\Facades\Semaphore;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +21,7 @@ class AdminController extends Controller
         return view('administrator.dashboard');
     }
     public function SystemUser(){
-        $systemusers = SystemUser::all();
+        $systemusers = SystemUser::where('role', '!=', 'User')->get();
         return view('administrator.systemuser', compact('systemusers'));
 
     }
@@ -29,8 +30,9 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:system_users,email',
-            'phone_number' => 'required|string|min:11|max:11|unique:system_users,phone_number',
+            'phone_number' => 'required|string|min:11|max:11|unique:system_users,PhoneNumber',
             'role' => 'required|string|max:255',
+            'Address' => 'required|string|max:255',
         ]);
 
         // Check if validation fails
@@ -43,14 +45,21 @@ class AdminController extends Controller
         $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8);
         $password = Hash::make($password);
 
+        // //send the password to the user
+        // Semaphore::message()->send(
+        //     $request->phone_number,
+        //     'Good day, your account has been created successfully. Your password is ' . $password . '. Please change your password after login. Thank you.'
+        // );
+
         try {
             // Create a new SystemUser instance and save it to the database
             $systemuser = new SystemUser;
-            $systemuser->name = $request->FullName;
-            $systemuser->email = $request->Email;
-            $systemuser->phone_number = $request->PhoneNumber;
+            $systemuser->FullName = $request->name;
+            $systemuser->Email = $request->email;
+            $systemuser->PhoneNumber = $request->phone_number;
+            $systemuser->Address = $request->Address;
             $systemuser->role = $request->role;
-            $systemuser->password = $password;
+            $systemuser->Password = $password;
             $systemuser->save();
 
             // Redirect back with success message
@@ -60,7 +69,7 @@ class AdminController extends Controller
             Log::error($e->getMessage());
 
             // Redirect back with error message
-            return redirect()->back()->with('error', 'An error occurred while adding the user. Please try again later.');
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
     }
@@ -195,7 +204,7 @@ class AdminController extends Controller
 
     }
     public function customer(){
-        $customers = customerInformation::all();
+        $customers = SystemUser::where('role', 'User')->get();
         return view('administrator.customer', compact('customers'));
 
     }

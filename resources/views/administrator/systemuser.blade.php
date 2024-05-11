@@ -49,9 +49,9 @@
                                         @if(count($systemusers) > 0)
                                             @foreach($systemusers as $user)
                                             <tr>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->phone_number }}</td>
+                                                <td>{{ $user->FullName }}</td>
+                                                <td>{{ $user->Email }}</td>
+                                                <td>{{ $user->PhoneNumber}}</td>
                                                 <td>{{ $user->role }}</td>
 
                                                 <td>

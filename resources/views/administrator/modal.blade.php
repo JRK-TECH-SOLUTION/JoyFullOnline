@@ -28,6 +28,12 @@
                         <input type="text" class="form-control" id="inputEmail3" name="phone_number" placeholder="Phone Number">
                         </div>
                    </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputEmail3" name="Address" placeholder="Address">
+                        </div>
+                      </div>
                      <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Role</label>
                         <div class="col-sm-9">

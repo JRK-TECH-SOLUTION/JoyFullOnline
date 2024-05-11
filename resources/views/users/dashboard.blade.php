@@ -26,17 +26,17 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mb-3 food-item">
                 <form method="post" action="addtocartItem">
                   @csrf
-                    <input type="hidden" name="item_name" value="{{$products->productname}}">
-                    <input type="hidden" name="item_price" value="{{$products->productprice}}">
+                    <input type="hidden" name="userid" value="{{Auth::user()->id}}">
                     <input type="hidden" name="item_id" value="{{$products->id}}">
+                    <input type="hidden" name="item_price" value="{{$products->productprice}}">
                     <div class="card rounded-0" align="center";>
                         <div class="food-img-holder position-relative overflow-hidden">
                         <img src="{{asset('uploads'.$products->productimage)}}" class="img-top img-thumbnail">
                         </div>
                         <div class="card-body">
                             <div class="lh-1">
-                                <div class="card-title fw-bold h5 mb-0">{{$products->productname}}</div>
-                                <div class="card-description text-muted"><small>{{$products->productdescription}}</small></div>
+                                <div class="card-title fw-bold h5 mb-0"><h4 class="float-center">{{$products->productname}}</h4></div>
+                               <br>
                                 <div><small class="card-description text-success h6 mb-0">₱ {{$products->productprice}}</small></div>
                                 <div class="d-grid">
                                 <div class="input-group input-sm">
@@ -57,4 +57,31 @@
     </section>
 </div>
 @include('users.includes.script')
+<script>
+  $(function() {
+      var Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+      });
+  
+      @if(session('success'))
+      $(document).Toasts('create', {
+          class: 'bg-success',
+          title: 'Successfully Added',
+          body: 'System User has been added successfully'
+      });
+      @endif
+      @if(session('error'))
+          $(document).Toasts('create', {
+              class: 'bg-danger',
+              title: 'Error',
+              body: '{{ session('error') }}'
+          });
+      @endif
+  
+  
+  });
+  </script>
 @include('users.includes.footer')
