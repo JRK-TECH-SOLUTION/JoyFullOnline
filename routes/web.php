@@ -44,8 +44,11 @@ Route::group(['role.user'], function () {
     Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
     Route::get('/corderbycustomer',[customerController::class,'corderbycustomer'])->name('mycart');
     Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
+    Route::post('/editquantity',[customerController::class,'editquantity']);
+    Route::post('checkout',[customerController::class,'checkout']);
+    Route::post('/finalcheck',[customerController::class,'finalcheck']);
 });
-  
+
 
 
 Route::group(['role.visitor'], function () {

@@ -65,12 +65,12 @@
           showConfirmButton: false,
           timer: 3000
       });
-  
+
       @if(session('success'))
       $(document).Toasts('create', {
           class: 'bg-success',
           title: 'Successfully Added',
-          body: 'System User has been added successfully'
+          body: '{{ session('success') }}'
       });
       @endif
       @if(session('error'))
@@ -80,8 +80,8 @@
               body: '{{ session('error') }}'
           });
       @endif
-  
-  
+
+
   });
   </script>
 @include('users.includes.footer')
