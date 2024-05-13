@@ -38,20 +38,7 @@
                             <div class="form-group">
                                 <label for="payment" class="form-label">Payment Method</label>
                                 <input type="text" class="form-control" name="payment" value="{{$payment}}" id="payment" readonly>
-                                @if ($payment == 'GCASH')
-                                    <a href=""data-toggle="modal" data-target="#gcash" >View Qr</a>
-                                @endif
                             </div>
-
-                            @if ($payment == 'GCASH')
-                                <div class="form-group">
-                                    <label for="payment" class="form-label">Reference Number</label>
-                                    <input type="text" class="form-control" name="referencenumber" value="" id="payment">
-                                </div>
-                            @else
-
-                            <input type="text" class="form-control" name="referencenumber" value="" id="payment">
-                            @endif
                             <div class="form-group">
                                 <label for="payment" class="form-label">Delivery Fee</label>
                                 <input type="text" class="form-control" name="deliveryfee" value="₱ 50.00" id="payment" readonly>
@@ -111,29 +98,5 @@
       </div>
     </section>
 </div>
- <!-- Modal -->
- <div class="modal fade" id="gcash" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">GCASH QR-CODE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-            <img src="{{asset('images/gcash.jpg')}}" class="img-thumbnail img-center" width="200">
-            <p class="text-muted">
-                Scan this to Pay. Secure your payment.
-            </p>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-    </div>
-    </div>
-</div>
-<!-- Modal -->
-
 @include('users.includes.script')
 @include('users.includes.footer')

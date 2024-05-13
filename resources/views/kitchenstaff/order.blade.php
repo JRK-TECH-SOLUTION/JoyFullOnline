@@ -46,7 +46,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @if($orders->count() > 0)
                                             @foreach($orders as $order)
                                                 <tr>
                                                     <td>{{$order->FullName}}</td>
@@ -57,6 +57,12 @@
                                                     <td>{{$order->payment_method}}</td>
                                                 </tr>
                                             @endforeach
+
+                                        @else
+                                            <tr>
+                                                <td colspan="7" class="text-center">No Orders Found</td>
+                                            </tr>
+                                        @endif
 
 
                                     </tbody>
