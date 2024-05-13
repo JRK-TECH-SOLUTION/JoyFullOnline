@@ -28,7 +28,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
             <a href="/cdashbaord" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="fas fa-tachometer-alt"></i>
               <p>
                 Menu
 
@@ -41,29 +41,31 @@
               <i class="fa fa-shopping-cart"></i>
               <p>
                 My Cart
-                <span class="right badge badge-danger">21</span>
+
 
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="corderbycustomer" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <a href="myorder" class="nav-link">
+              <i class=" fas fa-th"></i>
               <p>
                 My Orders
 
               </p>
             </a>
           </li>
-          <li class="nav-header">Profile</li>
           <li class="nav-item">
-            <a href="profile" class="nav-link">
-              <i class="nav-icon fas fa-cog"></i>
+            <a href="logout" class="nav-link">
+
+                <i class="fas fa-sign-out-alt"></i>
               <p>
-                Profile
+                LogOut
+
               </p>
             </a>
           </li>
+
 
 
 

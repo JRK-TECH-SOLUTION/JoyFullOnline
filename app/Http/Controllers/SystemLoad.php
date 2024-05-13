@@ -100,15 +100,15 @@ class SystemLoad extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with('error', $validator->errors()->first());
         }
-        
+
         $user = SystemUser::where('Email', $request->email)->first();
         if (!$user) {
             return redirect()->back()->with('error', 'Email not found. Please try again.');
         }
        //check if the password is correct
 
-        //display the get password 
-       
+        //display the get password
+
         // verify if the password from the request matches the hashed password in the database
         if (!Hash::check($request->password, $user->Password)) {
             return redirect()->back()->with('error', 'Invalid password. Please try again.');
@@ -120,8 +120,8 @@ class SystemLoad extends Controller
                 case 'Owner':
                     return redirect()->route('dashboard');
                     break;
-                case 'Kithen':
-                    return redirect()->route('kitchen.dashboard');
+                case 'Kitchen':
+                    return redirect()->route('kdashboard');
                     break;
                 case 'User':
                     return redirect()->route('cdashbaord');
@@ -139,17 +139,17 @@ class SystemLoad extends Controller
         //get the role
         $role = $user->Role;
 
-        
+
 
 
 //$2y$10$z7VVTQz6n9yi1ax1OoL/x.GOe9H/rvlsCDnSlY/5PMx9DqddLERsm
-       
 
-       
+
+
     }
     public function logout(){
         Auth::logout();
         return redirect()->route('welcome');
     }
-    
+
 }

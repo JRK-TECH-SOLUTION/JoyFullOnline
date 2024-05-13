@@ -42,14 +42,14 @@ class AdminController extends Controller
         }
 
         // Generate a random password with 8 characters
-        $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8);
-        $password = Hash::make($password);
+        $passwords = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8);
+        $password = Hash::make($passwords);
 
-        // //send the password to the user
-        // Semaphore::message()->send(
-        //     $request->phone_number,
-        //     'Good day, your account has been created successfully. Your password is ' . $password . '. Please change your password after login. Thank you.'
-        // );
+        //send the password to the user
+        Semaphore::message()->send(
+            $request->phone_number,
+            'Good day, your account has been created successfully. Your password is ' . $passwords . '.'
+        );
 
         try {
             // Create a new SystemUser instance and save it to the database
@@ -166,35 +166,11 @@ class AdminController extends Controller
 
     public function smsApi(){
 
-        //select all data from the smsapi table
-        $smsapi = smsAPI::all();
+
         return view('administrator.sms', compact('smsapi'));
     }
 
-    public function updateSMS(Request $request){
-        $validator = Validator::make($request->all(), [
-            'api_key' => 'required|string|max:255',
-            'sender_name' => 'required|string|max:255',
-            'link' => 'required|string|max:255',
-        ]);
-         // Check if validation fails
-         if ($validator->fails()) {
-            return redirect()->back()->with('error', $validator->errors()->first());
 
-        }
-
-
-        // Update the smsapi table with the new data
-        $smsapi = smsAPI::find(1);
-        $smsapi->api_key = $request->api_key;
-        $smsapi->sender_name = $request->sender_name;
-        $smsapi->link = $request->link;
-        $smsapi->save();
-
-        // Redirect back with success message
-        return redirect()->back()->with('success', 'SMS API updated successfully');
-
-    }
     function order(){
         //select all data from the orderinformation table inner join by customerInformation table
         $orders = orderinformation::join('customerInformation', 'orderinformation.customer_id', '=', 'customerInformation.id');

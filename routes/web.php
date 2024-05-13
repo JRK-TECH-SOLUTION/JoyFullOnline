@@ -37,7 +37,7 @@ Route::get('/maintenance', [AdminController::class, 'maintenance']);
 
 
 //kitche staff
-Route::get('/kdashboard',[KitchenStaff::class,'dashboard']);
+Route::get('/kdashboard',[KitchenStaff::class,'dashboard'])->name('kdashboard');
 Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
 
 Route::group(['role.user'], function () {
@@ -46,7 +46,11 @@ Route::group(['role.user'], function () {
     Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
     Route::post('/editquantity',[customerController::class,'editquantity']);
     Route::post('checkout',[customerController::class,'checkout']);
+    Route::post('checkoutgcash',[customerController::class,'checkoutgcash']);
     Route::post('/finalcheck',[customerController::class,'finalcheck']);
+
+    Route::get('/myorder',[customerController::class,'myorder'])->name('myorder');
+    Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
 });
 
 
@@ -60,6 +64,7 @@ Route::group(['role.visitor'], function () {
     route::post('/accountcreation',[SystemLoad::class,'accountcreation']);
     Route::get('/verify', [SystemLoad::class, 'verify'])->name('verify');
     Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNumber');
+
 });
 
 Route::get('/logout',[SystemLoad::class,'logout']);

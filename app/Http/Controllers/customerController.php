@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 use App\Models\productinformation;
 use App\Models\orderinformation;
-use App\Models\customerInformation;
+use App\Models\SystemUser;
 use App\Models\maintenanceInformation;
 use App\Models\checkout;
 use App\Models\checkoutitem;
@@ -13,6 +13,7 @@ use App\Models\CustomerCart;
 use App\Models\smsAPI;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Humans\Semaphore\Laravel\Facades\Semaphore;
 
 
 class customerController extends Controller
@@ -109,7 +110,13 @@ class customerController extends Controller
         ->where('customerID', $userid)
         ->get();
 
-        return view('users.checkout', compact('payment', 'deliverydate', 'userid', 'grandtotals', 'corderbycustomer', 'deliveryAddress'));
+            return view('users.checkout', compact('payment', 'deliverydate', 'userid', 'grandtotals', 'corderbycustomer', 'deliveryAddress'));
+
+
+
+    }
+    public function checkoutgcash(){
+        return view('users.checkoutgcash');
 
     }
     public function finalcheck(Request $request){
@@ -121,6 +128,7 @@ class customerController extends Controller
         $total = $request->total;
         $payment = $request->payment;
         $deliverydate = $request->deliverydate;
+        $referencenumber = $request->referencenumber;
         //time zone for the date
         date_default_timezone_set('Asia/Manila');
         //date = date now
@@ -133,6 +141,7 @@ class customerController extends Controller
         $finalcheckout->Total = $total;
         $finalcheckout->PaymentMethod = $payment;
         $finalcheckout->OrderDate = $date;
+        $finalcheckout->PaymentReference = $referencenumber;
         $finalcheckout->DeliveryDate = $deliverydate;
         $finalcheckout->Address = $request->address;
         $finalcheckout->PaymentStatus = 'PAID';
@@ -153,6 +162,14 @@ class customerController extends Controller
                 $finalcheckoutitem->quantity = $c->quantity;
                 $finalcheckoutitem->save();
             }
+            //search the customer information from the database
+            $customer = SystemUser::where('id', $userid)->first();
+            //send the sms to the customer
+            Semaphore::message()->send(
+                $customer->PhoneNumber,
+                'Your order has been placed successfully. Your order ID is ' . $orderID . '. Thank you for shopping with us.'
+            );
+
             //delete all the item in the cart
             CustomerCart::where('customerID', $userid)->delete();
            // return the route name mycart with the success message
@@ -165,5 +182,26 @@ class customerController extends Controller
             return redirect()->route('mycart')->with('error', $e->getMessage());
         }
 
+    }
+    public function myorder(){
+        $userid = auth()->user()->id;
+        //select all order information from the database where the customerID is equal to the logged in user
+        $myorder = checkout::where('customerID', $userid)->get();
+        return view('users.myorder', compact('myorder'));
+    }
+
+    public function myorderdetails($id)
+    {
+        Log::info("Fetching order details for order ID: $id");
+
+        // Fetch the order details from the database
+        $checkout = checkout::where('id', $id)->first();
+        $myorderdetails = checkoutitem::select('orderitem.*', 'productinformations.*')
+            ->join('productinformations', 'productinformations.id', '=', 'orderitem.productID')
+            ->where('orderID', $id)
+            ->get();
+        Log::info("Order details: " . $myorderdetails);
+
+        return response()->json($myorderdetails);
     }
 }
