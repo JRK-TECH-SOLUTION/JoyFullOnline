@@ -184,6 +184,8 @@
     });
   }
 </script>
-
+//TODO : Add Modal for updating the status of the order
+//TODO : Add the update status function in the controller
+//TODO : Add the route for the update status function
 @include('kitchenstaff.includes.footer')
 
