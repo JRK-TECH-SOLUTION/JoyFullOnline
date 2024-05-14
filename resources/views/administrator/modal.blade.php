@@ -40,6 +40,7 @@
                         <select class="form-control" name="role">
                             <option value="Owner">Owner</option>
                             <option value="Kitchen">Staff</option>
+                            <option value="Rider">Rider</option>
                         </select>
                         </div>
                      </div>

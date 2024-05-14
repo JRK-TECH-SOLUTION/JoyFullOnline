@@ -21,7 +21,7 @@ class AdminController extends Controller
         return view('administrator.dashboard');
     }
     public function SystemUser(){
-        $systemusers = SystemUser::where('role', '!=', 'User')->get();
+        $systemusers = SystemUser::where('role', '!=', 'User')->where('role', '!=', 'Rider')->get();
         return view('administrator.systemuser', compact('systemusers'));
 
     }
@@ -187,6 +187,11 @@ class AdminController extends Controller
     public function maintenance(){
         $maintenance = maintenanceInformation::all();
         return view('administrator.maintenance', compact('maintenance'));
+
+    }
+    public function delivery(){
+        $systemusers = SystemUser::where('role', 'Rider')->get();
+        return view('administrator.delivery', compact('systemusers'));
 
     }
 

@@ -32,6 +32,7 @@ Route::post('/updateSMS', [AdminController::class, 'updateSMS']);
 Route::get('/orderbycustomer',[AdminController::class,'order']);
 Route::get('/customer', [AdminController::class, 'customer']);
 Route::get('/maintenance', [AdminController::class, 'maintenance']);
+Route::get('/delivery', [AdminController::class, 'delivery']);
 });
 
 

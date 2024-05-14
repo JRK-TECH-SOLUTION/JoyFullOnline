@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Address');
             $table->string('Password');
             // add enum for role
-            $table->enum('role', ['Owner', 'Kitchen','User'])->default('User');
+            $table->enum('role', ['Owner', 'Kitchen','User','Rider'])->default('User');
             $table->string('VerificationCode')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('Status', ['Active', 'Inactive'])->default('Inactive');

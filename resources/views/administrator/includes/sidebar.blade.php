@@ -70,6 +70,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="delivery" class="nav-link">
+              <i class="nav-icon fas fa-motorcycle"></i>
+              
+              <p>
+                Delivery Riders Accounts
+              </p>
+            </a>
+          </li>
           
           <li class="nav-header">Profile</li>
           <li class="nav-item">
