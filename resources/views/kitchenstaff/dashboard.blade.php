@@ -68,7 +68,9 @@
            <div class="col-lg-8 col-sm-12 col-md-12">
               <div class="card card-primary">
                 <div class="card-header ">
-                  <h3 class="card-title">Latest Orders</h3>
+                  <h3 class="card-title">Latest Orders
+
+                  </h3>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -88,7 +90,7 @@
                           @if ($orders->count() > 0)
                             @foreach ($orders as $order)
                             <tr>
-                              <td>{{$order->id}}</td>
+                              <td>{{$order->OrderID}}</td>
                               <td>{{$order->FullName}}</td>
                               <td>
                                 @if ($order->status == 'Pending')
@@ -104,7 +106,7 @@
                               <td>{{$order->created_at->format('M d, Y')}}</td>
                               <td>{{$order->DeliveryDate}}</td>
                               <td>
-                                <a href="" class="btn btn-primary btn-sm">View</a>
+                                <button class="btn btn-primary btn-sm"  onclick="vieworder(this)" data-id="{{$order->IDorder }}" data-orderid="{{$order->OrderID}}" data-total="{{$order->Total}}" data-status="{{$order->status}}">View</button>
                               </td>
                             </tr>
                             @endforeach
@@ -122,14 +124,19 @@
            <div class="col-lg-4 col-sm-12 col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Product Information</h3>
+                <h3 class="card-title">Product Information
+                  
+                </h3>
+                <div class="" id="displaybutton">
+                  
+                </div>
               </div>
-              <div class="card-body">
+              <div class="card-body " id="displaydata">
                 <h5 class="text-muted">Order ID: </h5>
                 <h5 class="text-muted">Total: </h5>
                 <h5 class="text-muted">Status: </h5>
                 <hr>
-                
+
               </div>
             </div>
          </div>
@@ -138,5 +145,45 @@
     </section>
 </div>
 @include('kitchenstaff.includes.script')
+<script>
+  function vieworder(e){
+    var id = $(e).data('id');
+    var orderid = $(e).data('orderid');
+    var total = $(e).data('total');
+    var status = $(e).data('status');
+
+    $.ajax({
+        url: "/vieworder/" + id,
+        type: "GET",
+        success: function(data){
+        $('#displaydata').html('');
+        $('#displaybutton').html('');
+        $('#displaybutton').append(`
+              <button class="btn btn-sm btn-danger float-right">Update Status</button>
+        `);
+          $('#displaydata').append(`
+                
+                  <h5 class="text-muted">Order ID: ${orderid}</h5>
+                  <h5 class="text-muted">Total:${total} </h5>
+                  <h5 class="text-muted">Status: ${status}</h5>
+                  <hr>
+                
+            `);
+            //display the product information
+            data.forEach(element => {
+              $('#displaydata').append(`
+                  <li class="list-group-item">
+                    <li class="list-group-item">
+                        <b>${element.productname}</b>
+                        <span class="float-right">${element.quantity} x ${element.productprice}</span>
+                    </li>
+                  </li>
+              `)
+        });
+      }
+    });
+  }
+</script>
+
 @include('kitchenstaff.includes.footer')
 

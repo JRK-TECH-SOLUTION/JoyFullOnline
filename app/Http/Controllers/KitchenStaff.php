@@ -7,6 +7,8 @@ use App\Models\customerInformation;
 use App\Models\maintenanceInformation;
 use App\Models\checkout;
 use App\Models\SystemUser;
+
+use App\Models\checkoutitem;
 use Illuminate\Http\Request;
 
 date_default_timezone_set('Asia/Manila');
@@ -27,11 +29,35 @@ class KitchenStaff extends Controller
         $totalSalesMonth = checkout::where('status', 'Done')->whereMonth('created_at', date('m'))->sum('total');
 
 
-        //select all the data from checkout innerjoin by SystemUser Order by created_at Desc where status is not equal Done
-        $orders = checkout::join('system_users', 'checkout.customerID', '=', 'system_users.id')->where('checkout.status', '!=', 'Done')->orderBy('checkout.created_at', 'DESC')->get();
+        $orders = Checkout::join('system_users', 'checkout.customerID', '=', 'system_users.id')
+            ->where('checkout.status', '!=', 'Done')
+            ->orderBy('checkout.created_at', 'DESC')
+            ->select('checkout.*', 'system_users.*', 'checkout.id as IDorder')
+            ->get();
        
 
         return view('kitchenstaff.dashboard', compact('total', 'totalSales', 'totalSalesMonth', 'orders'));
+    }
+    public function vieworder($id){
+        
+
+        
+        // Fetch the order details from the database
+        $checkout = checkout::where('id', $id)->first();
+        $myorderdetails = checkoutitem::select('orderitem.*', 'productinformations.*')
+            ->join('productinformations', 'productinformations.id', '=', 'orderitem.productID')
+            ->where('orderID', $id)
+            ->get();
+        
+            return response()->json($myorderdetails);
+        
+      
+
+    }
+    public function updateorder($id){
+        //update the status of the order
+        $update = checkout::where('id', $id)->update(['status' => 'Processing']);
+        return response()->json('success');
     }
 
 }

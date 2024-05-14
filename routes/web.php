@@ -40,6 +40,8 @@ Route::get('/delivery', [AdminController::class, 'delivery']);
 //kitche staff
 Route::get('/kdashboard',[KitchenStaff::class,'dashboard'])->name('kdashboard');
 Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
+Route::get('vieworder/{id}',[KitchenStaff::class,'vieworder']);
+Route::get('updateorder/{id}',[KitchenStaff::class,'updateorder']);
 
 Route::group(['role.user'], function () {
     Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
