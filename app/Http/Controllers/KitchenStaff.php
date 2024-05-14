@@ -7,7 +7,7 @@ use App\Models\customerInformation;
 use App\Models\maintenanceInformation;
 use App\Models\checkout;
 use App\Models\SystemUser;
-
+use Humans\Semaphore\Laravel\Facades\Semaphore;
 use App\Models\checkoutitem;
 use Illuminate\Http\Request;
 
@@ -23,10 +23,10 @@ class KitchenStaff extends Controller
     //set the time zone
        
         //sum the Total from checkout where status is Done and created at is today
-        $totalSales = checkout::where('status', 'Done')->whereDate('created_at', date('Y-m-d'))->sum('total');
+        $totalSales = checkout::where('status', 'Delivered')->whereDate('created_at', date('Y-m-d'))->sum('Total');
 
         //sum the Total from checkout where status is Done and created month at is today
-        $totalSalesMonth = checkout::where('status', 'Done')->whereMonth('created_at', date('m'))->sum('total');
+        $totalSalesMonth = checkout::where('status','Delivered')->whereMonth('created_at', date('m'))->sum('Total');
 
 
         $orders = Checkout::join('system_users', 'checkout.customerID', '=', 'system_users.id')
@@ -59,5 +59,25 @@ class KitchenStaff extends Controller
         $update = checkout::where('id', $id)->update(['status' => 'Processing']);
         return response()->json('success');
     }
-
+    public function UpdateOrderK(Request $request){
+        //update the status of the order
+        $stat = $request->status;
+        $id = $request->orderid;
+        $orderid = $request->ordersid;
+        $update = checkout::where('id', $id)->update(['status' => $stat]);
+        $userid = checkout::where('id', $id)->first();
+        $userid = $userid->customerID;
+        
+        $user = SystemUser::where('id', $userid)->first();
+        $usernumber = $user->PhoneNumber;
+        //send the sms to the customer
+        Semaphore::message()->send(
+            $usernumber,
+            'Your Order '.$orderid.' is now '.$stat
+            
+        );
+        //get
+       //back with a message
+        return back()->with('success', 'Order Updated');
+    }
 }

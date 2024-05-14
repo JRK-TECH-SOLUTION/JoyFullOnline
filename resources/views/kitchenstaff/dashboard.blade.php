@@ -39,7 +39,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                   <div class="inner">
-                    <h3>{{$totalSales}}</h3>
+                    <h3>{{'₱' . number_format($totalSales)}}</h3>
     
                     <p>Daily Sales</p>
                   </div>
@@ -53,7 +53,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>{{$totalSalesMonth}}</h3>
+                    <h3>{{'₱' . number_format($totalSalesMonth)}}</h3>
     
                     <p>Monthly Sales</p>
                   </div>
@@ -144,6 +144,40 @@
       </div>
     </section>
 </div>
+<div class="modal fade" id="UpdateUser">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Update Order</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="UpdateOrderK" method="post" autocomplete="OFF">
+          @csrf
+          <input type="hidden" id="orderid" name="orderid">
+          <input type="hidden" id="ordersid" name="ordersid">
+          <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </div>
+      </div>
+      <div class="modal-footer">
+
+        <button type="submit" class="btn btn-primary float-right">Save Account</button></form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 @include('kitchenstaff.includes.script')
 <script>
   function vieworder(e){
@@ -151,20 +185,22 @@
     var orderid = $(e).data('orderid');
     var total = $(e).data('total');
     var status = $(e).data('status');
-
+    $('#orderid').val(id);
+    $('#ordersid').val(orderid);
     $.ajax({
         url: "/vieworder/" + id,
         type: "GET",
         success: function(data){
+
         $('#displaydata').html('');
         $('#displaybutton').html('');
         $('#displaybutton').append(`
-              <button class="btn btn-sm btn-danger float-right">Update Status</button>
+              <button class="btn btn-sm btn-danger float-right" data-toggle="modal" data-target="#UpdateUser">Update Status</button>
         `);
           $('#displaydata').append(`
                 
                   <h5 class="text-muted">Order ID: ${orderid}</h5>
-                  <h5 class="text-muted">Total:${total} </h5>
+                  <h5 class="text-muted">Total:₱${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} </h5>
                   <h5 class="text-muted">Status: ${status}</h5>
                   <hr>
                 
@@ -184,8 +220,33 @@
     });
   }
 </script>
-//TODO : Add Modal for updating the status of the order
-//TODO : Add the update status function in the controller
-//TODO : Add the route for the update status function
+<script>
+  $(function() {
+      var Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+      });
+
+      @if(session('success'))
+      $(document).Toasts('create', {
+          class: 'bg-success',
+          title: 'Successfully Added',
+          body: '{{ session('success') }}'
+      });
+      @endif
+      @if(session('error'))
+          $(document).Toasts('create', {
+              class: 'bg-danger',
+              title: 'Error',
+              body: '{{ session('error') }}'
+          });
+      @endif
+
+
+  });
+  </script>
+
 @include('kitchenstaff.includes.footer')
 

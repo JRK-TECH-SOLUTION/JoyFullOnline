@@ -49,7 +49,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="payment" class="form-label">Total</label>
-                                <input type="text" class="form-control" name="total" value="{{'₱' . number_format($grandtotals + 50)}}" id="deliverytime" readonly>
+                                <input type="text" class="form-control" name="totals" value="{{'₱' . number_format($grandtotals + 50)}}" id="deliverytime" readonly>
+                                <input type="hidden" class="form-control" name="total" value="{{$grandtotals + 50}}" id="deliverytime" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label">Address</label>
