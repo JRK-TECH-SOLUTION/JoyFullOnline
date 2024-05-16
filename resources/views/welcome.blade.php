@@ -243,7 +243,34 @@
     <!-- Feature Recipe Section End -->
 
     <!-- Footer Section Begin -->
-    
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="fs-left">
+                        <div class="logo">
+                            <a href="/">
+                                <img src="{{asset('images/logo.png')}}" style="height: 250px;width:250px;" alt="">
+                            </a>
+                        </div>
+                        <h4>Call Us: </h4>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1930.909301535166!2d121.08431344834212!3d14.552363583577172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c62cebb0cab9%3A0x537c02a6cf450bdb!2s1600%20R.%20Tatco%2C%20Pasig%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1715844752968!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Footer Section End -->
 
     
