@@ -120,11 +120,14 @@ class SystemLoad extends Controller
                 case 'Owner':
                     return redirect()->route('dashboard');
                     break;
-                case 'Kithen':
-                    return redirect()->route('kitchen.dashboard');
+                case 'Kitchen':
+                    return redirect()->route('kdashboard');
                     break;
                 case 'User':
                     return redirect()->route('cdashbaord');
+                    break;
+                case 'Rider':
+                    return redirect()->route('rdashboard');
                     break;
                 default:
                     return redirect()->route('login')->with('error', 'Invalid role. Please try again.');

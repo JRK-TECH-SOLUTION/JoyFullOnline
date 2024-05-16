@@ -37,7 +37,7 @@ Route::get('/maintenance', [AdminController::class, 'maintenance']);
 
 
 //kitche staff
-Route::get('/kdashboard',[KitchenStaff::class,'dashboard']);
+Route::get('/kdashboard',[KitchenStaff::class,'dashboard'])->name('kdashboard');
 Route::get('/korderbycustomer',[KitchenStaff::class,'order']);
 
 Route::group(['role.user'], function () {
