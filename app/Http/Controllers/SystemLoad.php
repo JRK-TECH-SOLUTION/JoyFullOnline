@@ -93,60 +93,56 @@ class SystemLoad extends Controller
         return redirect()->back()->with('error', 'Invalid verification code. Please try again.');
     }
     public function applylogin(Request $request){
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:8',
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()->with('error', $validator->errors()->first());
-        }
-
-        $user = SystemUser::where('Email', $request->email)->first();
-        if (!$user) {
-            return redirect()->back()->with('error', 'Email not found. Please try again.');
-        }
-       //check if the password is correct
-
-        //display the get password
-
-        // verify if the password from the request matches the hashed password in the database
-        if (!Hash::check($request->password, $user->Password)) {
-            return redirect()->back()->with('error', 'Invalid password. Please try again.');
-        }else{
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required|string|min:8',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->with('error', $validator->errors()->first());
+            }
+    
+            $user = SystemUser::where('Email', $request->email)->first();
+            if (!$user) {
+                return redirect()->back()->with('error', 'Email not found. Please try again.');
+            }
+           //check if the password is correct
+    
+            //display the get password
+    
+            // verify if the password from the request matches the hashed password in the database
+            if (!Hash::check($request->password, $user->Password)) {
+                return redirect()->back()->with('error', 'Invalid password. Please try again.');
+            }else{
+                Auth::login($user);
+                //get the role
+                $role = $user->role;
+                switch ($role) {
+                    case 'Owner':
+                        return redirect()->route('dashboard');
+                        break;
+                    case 'Kitchen':
+                        return redirect()->route('kdashboard');
+                        break;
+                    case 'User':
+                        return redirect()->route('cdashbaord');
+                        break;
+                    case 'Rider':
+                        return redirect()->route('rdashboard');
+                        break;
+                    default:
+                        return redirect()->route('login')->with('error', 'Invalid role. Please try again.');
+                        break;
+                }
+            }
+    
+            // if (!Hash::check($request->password, $user->Password)) {
+            //     return redirect()->back()->with('error', 'Invalid password. Please try again.');
+            // }
             Auth::login($user);
             //get the role
-            $role = $user->role;
-            switch ($role) {
-                case 'Owner':
-                    return redirect()->route('dashboard');
-                    break;
-                case 'Kitchen':
-                    return redirect()->route('kdashboard');
-                    break;
-                case 'User':
-                    return redirect()->route('cdashbaord');
-                    break;
-                case 'Rider':
-                    return redirect()->route('rdashboard');
-                    break;
-                default:
-                    return redirect()->route('login')->with('error', 'Invalid role. Please try again.');
-                    break;
-            }
-        }
-
-        // if (!Hash::check($request->password, $user->Password)) {
-        //     return redirect()->back()->with('error', 'Invalid password. Please try again.');
-        // }
-        Auth::login($user);
-        //get the role
-        $role = $user->Role;
-
-
-
-
-//$2y$10$z7VVTQz6n9yi1ax1OoL/x.GOe9H/rvlsCDnSlY/5PMx9DqddLERsm
-
+            $role = $user->Role;
+    
+        
 
 
     }
