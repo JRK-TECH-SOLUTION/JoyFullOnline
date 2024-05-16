@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('PaymentStatus');
             $table->string('PaymentMethod');
             $table->string('PaymentReference')->nullable();
-            $table->enum('status', ['Pending', 'Processing', 'Delivered','Rejected','Accepted'])->default('Pending');
+            $table->enum('status', ['Pending', 'Processing', 'Delivered','Rejected','Accepted','Ready to Deliver'])->default('Pending');
             $table->string('Notes')->nullable();
             $table->string('Address');
             $table->string('OrderDate');

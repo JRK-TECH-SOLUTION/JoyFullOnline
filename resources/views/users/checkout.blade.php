@@ -50,7 +50,7 @@
                                 </div>
                             @else
 
-                            <input type="text" class="form-control" name="referencenumber" value="" id="payment">
+                            <input type="hidden" class="form-control" name="referencenumber" value="" id="payment">
                             @endif
                             <div class="form-group">
                                 <label for="payment" class="form-label">Delivery Fee</label>
