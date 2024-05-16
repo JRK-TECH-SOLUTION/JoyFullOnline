@@ -12,13 +12,34 @@ use App\Models\customerInformation;
 use App\Models\maintenanceInformation;
 use App\Models\smsAPI;
 use Humans\Semaphore\Laravel\Facades\Semaphore;
+use App\Models\checkout;
+use App\Models\checkoutitem;
 
 use Illuminate\Support\Facades\Hash;
-
+date_default_timezone_set('Asia/Manila');
 class AdminController extends Controller
 {
     public function dashboard(){
-        return view('administrator.dashboard');
+         //count the total ID in  checkout where status is Pending and Approved
+         $pending = checkout::where('status', 'Pending')->count();
+         $approved = checkout::where('status', 'Approved')->count();
+         $total = $pending + $approved;
+         //sum the Total from checkout where status is Done and created at is today
+        $totalSales = checkout::where('status', 'Delivered')->whereDate('created_at', date('Y-m-d'))->sum('Total');
+        //sum the Total from checkout where status is Done and created month at is today
+        $totalSalesMonth = checkout::where('status','Delivered')->whereMonth('created_at', date('m'))->sum('Total');
+
+        //count the is of system_user where Role is User
+        $totalCustomer = SystemUser::where('role', 'User')->count();
+
+        //select * the product order by quantity small to big
+        $products = productinformation::orderBy('productquantity', 'asc')->get();
+
+        
+        
+
+        //return
+        return view('administrator.dashboard', compact('total', 'totalSales', 'totalSalesMonth', 'totalCustomer', 'products'));
     }
     public function SystemUser(){
         $systemusers = SystemUser::where('role', '!=', 'User')->where('role', '!=', 'Rider')->get();
@@ -172,8 +193,10 @@ class AdminController extends Controller
 
 
     function order(){
-        //select all data from the orderinformation table inner join by customerInformation table
-        $orders = orderinformation::join('customerInformation', 'orderinformation.customer_id', '=', 'customerInformation.id');
+        $orders = Checkout::join('system_users', 'checkout.customerID', '=', 'system_users.id')
+
+        ->select('checkout.*', 'system_users.*', 'checkout.id as IDorder')
+        ->get();
         return view('administrator.order', compact('orders'));
 
 

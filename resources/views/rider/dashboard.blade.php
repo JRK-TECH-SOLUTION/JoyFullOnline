@@ -1,6 +1,6 @@
-@include('kitchenstaff.includes.header')
-@include('kitchenstaff.includes.nav')
-@include('kitchenstaff.includes.sidebar')
+@include('rider.includes.header')
+@include('rider.includes.nav')
+@include('rider.includes.sidebar')
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -21,50 +21,6 @@
     <section class="content">
       <div class="container-fluid">
           <div class="row">
-              <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-info">
-                  <div class="inner">
-                    <h3>{{$total}}</h3>
-    
-                    <p>New Orders</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fas fa-shopping-bag"></i>
-                  </div>
-                 
-                </div>
-              </div>
-              <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                  <div class="inner">
-                    <h3>{{'₱' . number_format($totalSales)}}</h3>
-    
-                    <p>Daily Sales</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fas fa-dollar-sign"></i>
-                  </div>
-                  
-                </div>
-              </div>
-              <div class="col-lg-4 col-6">
-                <!-- small box -->
-                <div class="small-box bg-success">
-                  <div class="inner">
-                    <h3>{{'₱' . number_format($totalSalesMonth)}}</h3>
-    
-                    <p>Monthly Sales</p>
-                  </div>
-                  <div class="icon">
-                    <i class="fas fa-dollar-sign"></i>
-                  </div>
-                 
-                </div>
-              </div>
-          </div>
-          <div class="row">
            <div class="col-lg-8 col-sm-12 col-md-12">
               <div class="card card-primary">
                 <div class="card-header ">
@@ -80,41 +36,35 @@
                             <th>Order ID</th>
                             
                             <th>Customer Name</th>
-                            <th>Status</th>
-                            <th>Date Order</th>
+                            <th>Address</th>
                             <th>Delivery Date</th>
+                            <th>Total Amount</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @if ($orders->count() > 0)
+                          @if($orders->count() > 0)
                             @foreach ($orders as $order)
                             <tr>
                               <td>{{$order->OrderID}}</td>
                               <td>{{$order->FullName}}</td>
-                              <td>
-                                @if ($order->status == 'Pending')
-                                  <span class="badge badge-warning">{{$order->status}}</span>
-                                @elseif ($order->status == 'Delivered')
-                                  <span class="badge badge-success">{{$order->status}}</span>
-                                @else
-                                  <span class="badge badge-danger">{{$order->status}}</span>
-                                  
-                                @endif
-                              
-                              </td>
-                              <td>{{$order->created_at->format('M d, Y')}}</td>
+                              <td>{{$order->Address}}</td>
+
                               <td>{{$order->DeliveryDate}}</td>
+                              <td>₱{{number_format($order->Total, 2)}}</td>
                               <td>
                                 <button class="btn btn-primary btn-sm"  onclick="vieworder(this)" data-id="{{$order->IDorder }}" data-orderid="{{$order->OrderID}}" data-total="{{$order->Total}}" data-status="{{$order->status}}">View</button>
                               </td>
                             </tr>
+                              
                             @endforeach
                           @else
                             <tr>
                               <td colspan="6" class="text-center">No Orders Found</td>
                             </tr>
                           @endif
+                         
+                          
                         </tbody>
                       </table>
                     </div>
@@ -154,32 +104,28 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="UpdateOrderK" method="post" autocomplete="OFF">
+        <form action="UpdateOrderKS" method="post" autocomplete="OFF">
           @csrf
           <input type="hidden" id="orderid" name="orderid">
           <input type="hidden" id="ordersid" name="ordersid">
           <div class="form-group">
                 <label for="status">Status</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="Pending">Pending</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Accepted">Accepted</option>
-                    <option value="Processing">Processing</option>
-                    <option value="Ready to Deliver">Ready to Deliver</option>
                     <option value="Delivered">Delivered</option>
                 </select>
-            </div>
+          </div>
+         
       </div>
       <div class="modal-footer">
 
-        <button type="submit" class="btn btn-primary float-right">Save Account</button></form>
+        <button type="submit" class="btn btn-primary float-right">Save Changes</button></form>
       </div>
     </div>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
-@include('kitchenstaff.includes.script')
+@include('rider.includes.script')
 <script>
   function vieworder(e){
     var id = $(e).data('id');
@@ -189,7 +135,7 @@
     $('#orderid').val(id);
     $('#ordersid').val(orderid);
     $.ajax({
-        url: "/vieworder/" + id,
+        url: "/vieworderss/" + id,
         type: "GET",
         success: function(data){
 
@@ -249,5 +195,5 @@
   });
   </script>
 
-@include('kitchenstaff.includes.footer')
+@include('rider.includes.footer')
 

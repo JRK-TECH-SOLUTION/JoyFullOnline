@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('Address');
             $table->string('OrderDate');
             $table->string('DeliveryDate');
+            $table->string('riderID')->nullable();
             $table->timestamps();
         });
     }

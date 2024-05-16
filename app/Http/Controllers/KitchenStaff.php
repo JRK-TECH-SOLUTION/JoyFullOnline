@@ -34,9 +34,12 @@ class KitchenStaff extends Controller
             ->orderBy('checkout.created_at', 'DESC')
             ->select('checkout.*', 'system_users.*', 'checkout.id as IDorder')
             ->get();
+
+        //select * from system_user where role ='Rider
+        $rider = SystemUser::where('role', 'Rider')->get();
        
 
-        return view('kitchenstaff.dashboard', compact('total', 'totalSales', 'totalSalesMonth', 'orders'));
+        return view('kitchenstaff.dashboard', compact('total', 'totalSales', 'totalSalesMonth', 'orders', 'rider'));
     }
     public function vieworder($id){
         
@@ -63,8 +66,9 @@ class KitchenStaff extends Controller
         //update the status of the order
         $stat = $request->status;
         $id = $request->orderid;
+        $rider = $request->rider;
         $orderid = $request->ordersid;
-        $update = checkout::where('id', $id)->update(['status' => $stat]);
+        $update = checkout::where('id', $id)->update(['status' => $stat, 'riderID' => $rider]);
         $userid = checkout::where('id', $id)->first();
         $userid = $userid->customerID;
         
@@ -80,4 +84,5 @@ class KitchenStaff extends Controller
        //back with a message
         return back()->with('success', 'Order Updated');
     }
+    
 }

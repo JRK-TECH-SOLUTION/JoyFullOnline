@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\KitchenStaff;
 use App\Http\Controllers\SystemLoad;
+use App\Http\Controllers\RiderController;
 use App\Http\Middleware\CheckRole;
 
 /*
@@ -71,7 +72,11 @@ Route::group(['role.visitor'], function () {
 
 });
 
+//rider
+Route::get('/rdashboard',[RiderController::class,'riderdashboard'])->name('rdashboard');
+Route::get('vieworderss/{id}',[RiderController::class,'vieworder']);
 Route::get('/logout',[SystemLoad::class,'logout']);
+Route::post('/UpdateOrderKS',[RiderController::class,'UpdateOrderK']);
 
 
 // Route::get('/', function () {

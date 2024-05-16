@@ -51,10 +51,11 @@
                                                 <tr>
                                                     <td>{{$order->FullName}}</td>
                                                     <td>{{$order->Address}}</td>
-                                                    <td>{{$order->order_id}}</td>
-                                                    <td>{{$order->total}}</td>
+                                                    <td>{{$order->OrderID}}</td>
+                                                    <td>{{$order->Total}}</td>
                                                     <td>{{$order->status}}</td>
-                                                    <td>{{$order->payment_method}}</td>
+                                                    <td>{{$order->PaymentMethod}}</td>
+                                                    <td>{{$order->created_at->format('M d, Y')}}</td>
                                                 </tr>
                                             @endforeach
 

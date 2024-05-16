@@ -169,10 +169,20 @@
                     <option value="Delivered">Delivered</option>
                 </select>
             </div>
+            <div class="form-group">
+              <label for="" class="form-label">Rider</label>
+              <select name="rider" id="rider" class="form-control">
+                <option value="">Select Rider</option>
+                @foreach($rider as $r)
+                <option value="{{$r->id}}">{{$r->FullName}}</option>
+                @endforeach
+              </select>
+            </div>
+
       </div>
       <div class="modal-footer">
 
-        <button type="submit" class="btn btn-primary float-right">Save Account</button></form>
+        <button type="submit" class="btn btn-primary float-right">Save Changes</button></form>
       </div>
     </div>
     <!-- /.modal-content -->

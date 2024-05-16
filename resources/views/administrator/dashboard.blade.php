@@ -26,59 +26,59 @@
                 <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{$total}}</h3>
 
                         <p>New Orders</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fas fa-shopping-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    
                     </div>
                 </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>4600</h3>
+                    <h3>{{'₱ '.number_format($totalSales)}}</h3>
 
                     <p>Daily Sales</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>44</h3>
+                    <h3>{{'₱ '.number_format($totalSalesMonth)}}</h3>
 
-                    <p>User Registrations</p>
+                    <p>Monthly Sales</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                
                 </div>
             </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3>{{$totalCustomer}}</h3>
 
-                        <p>Unique Visitors</p>
+                        <p>User Registrations</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="fas fa-users"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    
                     </div>
                 </div>
             </div>
 
         <div class="row mt-5">
-            <div class="col-md-6 col-lg-6">
+            <div class="col-md-12 col-lg-12">
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Stocks Information</h3>
@@ -98,30 +98,21 @@
                                     <th>Stocks</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                @foreach ($products as $product)
+                                <tr>
+                                    <td>{{$product->productname}}</td>
+                                    <td>{{$product->productquantity}}</td>
+                                </tr>
+                                    
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 <!-- /.card-body -->
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6">
-                <div class="card card-success">
-                        <div class="card-header">
-                            <h3 class="card-title">Sales Reports</h3>
-
-                            <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-
-                            </div>
-                        </div>
-                        <div class="card-body">
-
-                        </div>
-                    <!-- /.card-body -->
-                    </div>
-                </div>
-        </div>
+            
 
       </div>
     </section>
