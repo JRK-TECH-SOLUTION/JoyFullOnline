@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use \App\Models\SystemUser;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,9 +15,30 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        SystemUser::factory()->create([
+            'FullName' => 'Administrator',
+            'Email' => 'admin@admin.com',
+            'PhoneNumber' => '09123456789',
+            'Address' => 'Admin Address',
+            'role' => 'Owner',
+            'Password' => '$2y$10$E02qN8SybAEdNjmP1nz7Y.TRuJylO56964iogwlJzHa..KWHtcIFe',
+            'VerificationCode' => '123456',
+            'email_verified_at'=> now(),
+            'Status'=> 'Active',
+            'remember_token'=> '123',
+        ]);
+        SystemUser::factory()->create([
+            'FullName' => 'Kitchen Staff',
+            'Email' => 'Kitchen@admin.com',
+            'PhoneNumber' => '09123456798',
+            'Address' => 'Kitchen Address',
+            'role' => 'Kitchen',
+            'Password' => '$2y$10$E02qN8SybAEdNjmP1nz7Y.TRuJylO56964iogwlJzHa..KWHtcIFe',
+            'VerificationCode' => '123456',
+            'email_verified_at'=> now(),
+            'Status'=> 'Active',
+            'remember_token'=> '123',
+        ]);
+
     }
 }
