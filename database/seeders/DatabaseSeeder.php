@@ -39,6 +39,18 @@ class DatabaseSeeder extends Seeder
             'Status'=> 'Active',
             'remember_token'=> '123',
         ]);
+        SystemUser::factory()->create([
+            'FullName' => 'Rider 1',
+            'Email' => 'Rider@admin.com',
+            'PhoneNumber' => '09123456798',
+            'Address' => 'Rider1 Address',
+            'role' => 'Rider',
+            'Password' => '$2y$10$E02qN8SybAEdNjmP1nz7Y.TRuJylO56964iogwlJzHa..KWHtcIFe',
+            'VerificationCode' => '123456',
+            'email_verified_at'=> now(),
+            'Status'=> 'Active',
+            'remember_token'=> '123',
+        ]);
 
     }
 }
