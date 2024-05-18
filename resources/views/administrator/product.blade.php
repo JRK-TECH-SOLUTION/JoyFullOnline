@@ -36,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Description</th>
+
                                             <th>Price</th>
                                             <th>Quantity</th>
                                             <th>Image</th>
@@ -50,14 +50,14 @@
                                             @foreach ($products as $product)
                                                 <tr>
                                                     <td>{{ $product->productname }}</td>
-                                                    <td>{{ $product->productdescription }}</td>
+
                                                     <td>{{ $product->productprice }}</td>
                                                     <td>{{ $product->productquantity }}</td>
                                                     <td><img src="{{asset('uploads'.$product->productimage)}}" style="height:50px;width:50px;" alt=""></td>
                                                     <td>{{ $product->productcategory }}</td>
                                                     <td>{{ $product->productstatus }}</td>
                                                     <td>
-                                                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProduct" data-id="{{ $product->id }}" data-product_name="{{ $product->product_name }}" data-product_description="{{ $product->product_description }}" data-product_price="{{ $product->product_price }}" data-product_quantity="{{ $product->product_quantity }}" data-product_image="{{ $product->product_image }}" data-category_id="{{ $product->category_id }}" data-product_status="{{ $product->product_status }}">Edit</button>
+
                                                         <button class="btn btn-danger btn-sm" onclick="deleteProduct(this)" data-id="{{ $product->id }}">Delete</button>
                                                     </td>
                                                 </tr>

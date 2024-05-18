@@ -37,13 +37,19 @@
                             <div class="lh-1">
                                 <div class="card-title fw-bold h5 mb-0"><h4 class="float-center">{{$products->productname}}</h4></div>
                                <br>
-                                <div><small class="card-description text-success h6 mb-0">₱ {{$products->productprice}}</small></div>
+                                <div><small class="card-description text-success h5">₱ {{$products->productprice}}</small></div>
                                 <div class="d-grid">
+
+                                @if ($products->productquantity == 0)
+                                <div class="badge bg-danger">Out of Stock</div><br>
+                                @else
                                 <div class="input-group input-sm">
                                     <span class="input-group-text rounded-0">Quantity</span>
                                     <input type="number" class="form-control rounded-0 text-center" id="quantity" name="quantity" value="1" required="required">
                                 </div>
                                 <input type="submit" name="add" style="margin-top:5px;" class="btn btn-primary btn-sm rounded-0" value="Add to Cart">
+                                @endif
+
                                 </div>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ class KitchenStaff extends Controller
         $approved = checkout::where('status', 'Approved')->count();
         $total = $pending + $approved;
     //set the time zone
-       
+
         //sum the Total from checkout where status is Done and created at is today
         $totalSales = checkout::where('status', 'Delivered')->whereDate('created_at', date('Y-m-d'))->sum('Total');
 
@@ -37,24 +37,24 @@ class KitchenStaff extends Controller
 
         //select * from system_user where role ='Rider
         $rider = SystemUser::where('role', 'Rider')->get();
-       
+
 
         return view('kitchenstaff.dashboard', compact('total', 'totalSales', 'totalSalesMonth', 'orders', 'rider'));
     }
     public function vieworder($id){
-        
 
-        
+
+
         // Fetch the order details from the database
         $checkout = checkout::where('id', $id)->first();
         $myorderdetails = checkoutitem::select('orderitem.*', 'productinformations.*')
             ->join('productinformations', 'productinformations.id', '=', 'orderitem.productID')
             ->where('orderID', $id)
             ->get();
-        
+
             return response()->json($myorderdetails);
-        
-      
+
+
 
     }
     public function updateorder($id){
@@ -71,18 +71,34 @@ class KitchenStaff extends Controller
         $update = checkout::where('id', $id)->update(['status' => $stat, 'riderID' => $rider]);
         $userid = checkout::where('id', $id)->first();
         $userid = $userid->customerID;
-        
+        if($stat == 'Accepted'){
+            //get all the items in the order
+            $myorderdetails = checkoutitem::select('orderitem.*', 'productinformations.*')
+                ->join('productinformations', 'productinformations.id', '=', 'orderitem.productID')
+                ->where('orderID', $id)
+                ->get();
+            //update the quantity of the product
+
+            foreach($myorderdetails as $order){
+                $product = productinformation::where('id', $order->productID)->first();
+                $quantity = $product->productquantity - $order->quantity;
+                productinformation::where('id', $order->productID)->update(['productquantity' => $quantity]);
+            }
+
+
+        }
+
         $user = SystemUser::where('id', $userid)->first();
         $usernumber = $user->PhoneNumber;
         //send the sms to the customer
         Semaphore::message()->send(
             $usernumber,
             'Your Order '.$orderid.' is now '.$stat
-            
+
         );
         //get
        //back with a message
         return back()->with('success', 'Order Updated');
     }
-    
+
 }
