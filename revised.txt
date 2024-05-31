@@ -1,0 +1,15 @@
+So far ito po yung mga napansin ko at ng prof ko. May mga isinuggest po sya. 
+
+1. Home (404 not found) - kapag nasa menu
+2. GOOGLE MAP 
+3. Pa remove po ng TWITTER, INSTAGRAM, YOUTUBE. Ito po link ng Joyfull ✅ 
+4. OUR CHEFS (Pictures and Name ng Chef)
+5. TAB/NEW TAB TITLE instead of WELCOME TO ADMINISTRATOR papalitan na lang po ng name sa ADMIN DASHBOARD, KITCHEN STAFF, JOYFULL-User ✅ 
+6. Riders name, Contact No. and email (optional)
+7. Paki iba po design ng menu sa Users para hindi po same ng design sa KITCHEN STAFF and ADMIN suggestion po ito ng prof napansin po kasi eh
+8. ABOUT US 
+9. Edit Profile for USERS (names, contact number, and address) ADMINS, and KITCHEN STAFF (with pic for ADMIN and KITCHEN STAFF)
+10. Ma’am Lunie suggestions (separate the login and registration form ng Customers and admin/staff) 
+11. Delete items (404 not found)
+12. Background img kailangan own.  
+13. Menu, pa separate po ng Food packs, Food Trays, and Other Menu po
