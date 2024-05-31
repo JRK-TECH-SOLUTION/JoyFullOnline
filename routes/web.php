@@ -43,6 +43,7 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('/customer', [AdminController::class, 'customer']);
     Route::get('/maintenance', [AdminController::class, 'maintenance']);
     Route::get('/delivery', [AdminController::class, 'delivery']);
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
 // });
 
 

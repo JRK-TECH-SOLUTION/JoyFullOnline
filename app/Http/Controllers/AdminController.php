@@ -217,5 +217,11 @@ class AdminController extends Controller
         return view('administrator.delivery', compact('systemusers'));
 
     }
+    public function profile(){
+        $id = auth()->user()->id;
+        $profile = SystemUser::find($id);
+        return view('administrator.profile', compact('profile'));
+
+    }
 
 }
