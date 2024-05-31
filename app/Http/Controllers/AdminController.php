@@ -223,5 +223,27 @@ class AdminController extends Controller
         return view('administrator.profile', compact('profile'));
 
     }
+    
+    public function changePassword(Request $request){
+            // $oldpassword = $request->oldpassword;
+            // $NewPassword = $request->NewPassword;
+            // $ConfirmPassword = $request->ConfirmPassword;
+            // $id = auth()->user()->id;
+            // $profile = SystemUser::find($id);
+            // if (Hash::check($oldpassword, $profile->Password)) {
+            //     if ($NewPassword == $ConfirmPassword) {
+            //         $profile->Password = Hash::make($NewPassword);
+            //         $profile->save();
+            //         return redirect()->back()->with('success', 'Password Changed Successfully');
+            //     } else {
+            //         return redirect()->back()->with('error', 'New Password and Confirm Password does not match');
+            //     }
+            // } else {
+            //     return redirect()->back()->with('error', 'Old Password is incorrect');
+            // }
+        
+    
+
+    }
 
 }

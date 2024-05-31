@@ -38,7 +38,7 @@
                         </div>
                             <h3 class="profile-username text-center">{{$profile->FullName}}</h3>
 
-                            <p class="text-muted text-center">{{$profile->role}}</p>
+                            <p class="text-muted text-center">{{$profile->role}} | {{$profile->Status}}</p>
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
@@ -47,9 +47,7 @@
                                 <li class="list-group-item">
                                     <b>Contact #: </b> <a class="float-right">{{$profile->PhoneNumber}}</a>
                                 </li>
-                                <li class="list-group-item">
-                                    <b>Status</b> <a class="float-right">{{$profile->Status}}</a>
-                                </li>
+                             
                             </ul>
                     </div>
                 </div>
@@ -91,7 +89,10 @@
                     <div class="card-body">
                         <form action="changePassword" method="post">
                             @csrf
-                           
+                            <div class="form-group">
+                                <label for="OldPassword">Old Password</label>
+                                <input type="password" class="form-control" name="oldpassword">
+                            </div>
                             <div class="form-group">
                                 <label for="NewPassword">New Password</label>
                                 <input type="password" class="form-control" name="NewPassword">
@@ -148,4 +149,31 @@
         });
     });
 </script>
+<script>
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    
+        @if(session('success'))
+        $(document).Toasts('create', {
+            class: 'bg-success',
+            title: 'Successfully Added',
+            body: 'System User has been added successfully'
+        });
+        @endif
+        @if(session('error'))
+            $(document).Toasts('create', {
+                class: 'bg-danger',
+                title: 'Error',
+                body: '{{ session('error') }}'
+            });
+        @endif
+    
+    
+    });
+    </script>
 @include('administrator.includes.footer')
