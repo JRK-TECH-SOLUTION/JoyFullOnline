@@ -65,10 +65,11 @@
         <div class="icon">
           <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
         </div>
-
-        <span class="span">
+        <a href="https://maps.app.goo.gl/V3WQv5H2sJVjreVy7" target="__blank" style="cursor: pointer;">
+          <span class="span">
             211 R. TATCO ST. KALAWAAN PASIG CITY, Metro Manila, 1600
-        </span>
+        </span></a>
+       
       </address>
 
       <div class="separator"></div>
@@ -154,7 +155,7 @@
 
         <div class="text-center">
           <p class="headline-1 navbar-title">Visit Us</p>
-
+          
           <address class="body-4">
             211 R. TATCO ST. KALAWAAN PASIG CITY, Metro Manila, 1600
           </address>
@@ -769,7 +770,13 @@
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+  <script>
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.altKey && event.key === 'j') {
+        window.location.href = 'adminlogin';
+      }
+    });
+    </script>
 </body>
 
 </html>

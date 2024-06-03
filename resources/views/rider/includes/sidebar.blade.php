@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="rdashboard" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">JoyFull</span>
     </a>
@@ -11,10 +11,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('uploads/'.Auth::user()->profile_photo_path)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="/kdashboard" class="d-block">{{Auth::user()->FullName}}</a>
+            <a href="rdashboard" class="d-block">{{Auth::user()->FullName}}</a>
         </div>
       </div>
 
@@ -37,9 +37,18 @@
 
           </li>
           <li class="nav-item">
+            <a href="rprofile" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              
+              <p>
+                My Profile
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="logout" class="nav-link">
 
-                <i class="fas fa-sign-out-alt"></i>
+                <i class="nav-icon  fas fa-sign-out-alt"></i>
               <p>
                 LogOut
 

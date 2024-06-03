@@ -32,7 +32,7 @@
                             @if($profile->profile_photo_path=='')
                             <img class="profile-user-img img-fluid img-circle" src="{{asset('images/logo.png')}}" alt="User profile picture">
                             @else
-                            <img class="profile-user-img img-fluid img-circle" src="{{asset('storage/profile-photos/'.$profile->profile_photo_path)}}" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="{{asset('uploads/'.$profile->profile_photo_path)}}" alt="User profile picture">
                             @endif
                             
                         </div>
@@ -46,6 +46,9 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Contact #: </b> <a class="float-right">{{$profile->PhoneNumber}}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Address</b> <a class="float-right">{{$profile->Address}}</a>
                                 </li>
                              
                             </ul>
@@ -71,6 +74,10 @@
                             <div class="form-group">
                                 <label for="PhoneNumber">Phone Number</label>
                                 <input type="text" class="form-control" name="PhoneNumber" value="{{$profile->PhoneNumber}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="Address">Address</label>
+                                <input type="text" class="form-control" name="Address" value="{{$profile->Address}}">
                             </div>
                             <div class="form-group">
                                <button class="btn btn-sm btn-warning float-right">Update</button>
@@ -116,15 +123,16 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-4 col-sm-12">
-                                <img src="{{asset('images/logo.png')}}" id="imgs" class="img-rounded" style="height: 200px;width:200px;border-radius:50%;border:1px solid black" alt="">
+                                <img src="{{asset('uploads/'.$profile->profile_photo_path)}}" id="imgs" class="img-rounded" style="height: 200px;width:200px;border-radius:50%;border:1px solid black" alt="">
                             </div>
                             <div class="col-lg-8 col-sm-12">
-                                <form action="" method="post">
+                                <form action="updateimage" method="post"  enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <label for="profile_photo_path">Profile Photo</label>
                                         <input type="file" class="form-control" name="profile_photo_path">
                                     </div>
+                                    <input type="hidden" name="oldphoto" value="{{$profile->profile_photo_path}}">
                                     <div class="form-group">
                                         <button class="btn btn-sm btn-info float-right">Update Image</button>
                                     </div>
@@ -162,7 +170,7 @@
         $(document).Toasts('create', {
             class: 'bg-success',
             title: 'Successfully Added',
-            body: 'System User has been added successfully'
+            body: '{{ session('success') }}'
         });
         @endif
         @if(session('error'))

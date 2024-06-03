@@ -146,9 +146,65 @@ class SystemLoad extends Controller
 
 
     }
+    public function userapplylogin(Request $request){
+      
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required|string|min:8',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->with('error', $validator->errors()->first());
+            }
+    
+            $user = SystemUser::where('Email', $request->email)->first();
+            if (!$user) {
+                return redirect()->back()->with('error', 'Email not found. Please try again.');
+            }
+           //check if the password is correct
+    
+            //display the get password
+    
+            // verify if the password from the request matches the hashed password in the database
+            if (!Hash::check($request->password, $user->Password)) {
+                return redirect()->back()->with('error', 'Invalid password. Please try again.');
+            }else{
+                Auth::login($user);
+                //get the role
+                $role = $user->role;
+                switch ($role) {
+                    case 'Owner':
+                        return redirect()->route('login')->with('error', 'Not a User. Please Use the Staff Login');
+                        break;
+                    case 'Kitchen':
+                        return redirect()->route('login')->with('error', 'Not a User. Please Use the Staff Login');
+                        break;
+                    case 'User':
+                        return redirect()->route('cdashbaord');
+                        break;
+                    case 'Rider':
+                        return redirect()->route('login')->with('error', 'Not a User. Please Use the Staff Login');
+                        break;
+                    default:
+                        return redirect()->route('login')->with('error', 'Invalid role. Please try again.');
+                        break;
+                }
+            }
+    
+            // if (!Hash::check($request->password, $user->Password)) {
+            //     return redirect()->back()->with('error', 'Invalid password. Please try again.');
+            // }
+            Auth::login($user);
+            //get the role
+            $role = $user->Role;
+    
+
+    }
     public function logout(){
         Auth::logout();
         return redirect()->route('welcome');
+    }
+    public function  adminlogin(){
+        return view('adminlogin');
     }
 
 }
