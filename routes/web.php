@@ -72,15 +72,19 @@ Route::post('/userapplylogin',[SystemLoad::class,'userapplylogin']);
 
 
 // Route::middleware(['auth', 'role:User'])->group(function () {
-    Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
-    Route::get('/corderbycustomer',[customerController::class,'corderbycustomer'])->name('mycart');
-    Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
-    Route::post('/editquantity',[customerController::class,'editquantity']);
-    Route::post('checkout',[customerController::class,'checkout']);
-    Route::post('checkoutgcash',[customerController::class,'checkoutgcash']);
-    Route::post('/finalcheck',[customerController::class,'finalcheck']);
-    Route::get('/myorder',[customerController::class,'myorder'])->name('myorder');
-    Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
+    // Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
+    // Route::get('/corderbycustomer',[customerController::class,'corderbycustomer'])->name('mycart');
+    // Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
+    // Route::post('/editquantity',[customerController::class,'editquantity']);
+    // Route::post('checkout',[customerController::class,'checkout']);
+    // Route::post('checkoutgcash',[customerController::class,'checkoutgcash']);
+    // Route::post('/finalcheck',[customerController::class,'finalcheck']);
+    // Route::get('/myorder',[customerController::class,'myorder'])->name('myorder');
+    // Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
+
+    Route::get('/menu',[customerController::class,'menu'])->name('menu');
+    Route::get('/add-to-cart/id={id}/quantity={quantity}',[customerController::class,'addtocartItem']);
+
 // });
   
 

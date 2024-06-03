@@ -43,46 +43,46 @@ class customerController extends Controller
         return view('users.order', compact('corderbycustomer', 'grandtotal'));
 
     }
-    public function addtocartItem(Request $request){
+    // public function addtocartItem(Request $request){
 
 
-        try {
-            //check if the the item is already in the cart
-            $check = CustomerCart::where('customerID', $request->userid)->where('productID', $request->item_id)->first();
-            if ($check) {
-                //update the quantity of the item in the cart
-                $check->quantity = $check->quantity + $request->quantity;
-                $check->save();
+    //     try {
+    //         //check if the the item is already in the cart
+    //         $check = CustomerCart::where('customerID', $request->userid)->where('productID', $request->item_id)->first();
+    //         if ($check) {
+    //             //update the quantity of the item in the cart
+    //             $check->quantity = $check->quantity + $request->quantity;
+    //             $check->save();
 
-            }else{
-                $addtocart = new CustomerCart;
-                $addtocart->customerID = $request->userid;
-                $addtocart->productID = $request->item_id;
-                $addtocart->price = $request->item_price;
-                $addtocart->quantity = $request->quantity;
+    //         }else{
+    //             $addtocart = new CustomerCart;
+    //             $addtocart->customerID = $request->userid;
+    //             $addtocart->productID = $request->item_id;
+    //             $addtocart->price = $request->item_price;
+    //             $addtocart->quantity = $request->quantity;
 
-                //convert the price to integer
-                $price = (int)$request->item_price;
-                $quantity = (int)$request->quantity;
+    //             //convert the price to integer
+    //             $price = (int)$request->item_price;
+    //             $quantity = (int)$request->quantity;
 
-                $total = $price * $quantity;
-                $addtocart->total = $total;
+    //             $total = $price * $quantity;
+    //             $addtocart->total = $total;
 
-                $addtocart->save();
-            }
-
-
+    //             $addtocart->save();
+    //         }
 
 
-            return redirect()->back()->with('success', 'Product added to cart successfully');
-        } catch (\Exception $e) {
-            // Log the exception for debugging purposes
-            Log::error($e->getMessage());
 
-            // Redirect back with error message
-            return redirect()->back()->with('error', $e->getMessage());
-        }
-    }
+
+    //         return redirect()->back()->with('success', 'Product added to cart successfully');
+    //     } catch (\Exception $e) {
+    //         // Log the exception for debugging purposes
+    //         Log::error($e->getMessage());
+
+    //         // Redirect back with error message
+    //         return redirect()->back()->with('error', $e->getMessage());
+    //     }
+    // }
     public function editquantity(Request $request){
         try {
             //update the quantity of the item in the cart
@@ -203,5 +203,18 @@ class customerController extends Controller
         Log::info("Order details: " . $myorderdetails);
 
         return response()->json($myorderdetails);
+    }
+
+
+    public function menu(){
+        $item = productinformation::all();
+        return view('customer.menu', compact('item'));
+
+    }
+   //get the pass id and quantity to add to cart
+    public function addtocartItem($id, $quantity){
+       console.log($id);
+       console.log($quantity);
+       
     }
 }
