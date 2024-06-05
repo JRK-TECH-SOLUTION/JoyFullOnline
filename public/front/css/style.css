@@ -89,9 +89,6 @@ section{
     cursor: pointer;
 }
 
-.btn:hover{
-    letter-spacing: .2rem;
-}
 
 .header{
     position: fixed;
@@ -109,6 +106,7 @@ section{
     font-weight: bolder;
     font-size: 2.5rem;
     color:var(--text-color-1);
+   text-decoration: none;
 }
 
 .header .logo i{
@@ -189,13 +187,10 @@ section{
     font-size: 1.5rem;
     color:var(--text-color-1);
     border-radius: .5rem;
+    text-decoration: none;
 }
 
-.header .navbar a:hover{
-    color:var(--orange);
-    background:var(--bg-color-2);
-    padding-left: 2rem;
-}
+
  
 .home{
     display: flex;

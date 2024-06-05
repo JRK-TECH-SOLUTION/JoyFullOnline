@@ -83,8 +83,8 @@ Route::post('/userapplylogin',[SystemLoad::class,'userapplylogin']);
     // Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
 
     Route::get('/menu',[customerController::class,'menu'])->name('menu');
-    Route::get('/add-to-cart/id={id}/quantity={quantity}',[customerController::class,'addtocartItem']);
-
+    
+ 
 // });
   
 
