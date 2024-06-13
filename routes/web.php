@@ -27,6 +27,8 @@ Route::post('/create',[SystemLoad::class,'accountcreation']);
 route::post('/accountcreation',[SystemLoad::class,'accountcreation']);
 Route::get('/verify', [SystemLoad::class, 'verify'])->name('verify');
 Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNumber');
+Route::get('/adminlogin',[SystemLoad::class,'adminlogin'])->name('adminlogin');
+Route::post('/userapplylogin',[SystemLoad::class,'userapplylogin']);
 
 
 // Route::middleware(['auth','role:Owner'])->group(function () {
@@ -43,7 +45,15 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('/customer', [AdminController::class, 'customer']);
     Route::get('/maintenance', [AdminController::class, 'maintenance']);
     Route::get('/delivery', [AdminController::class, 'delivery']);
+<<<<<<< HEAD
     Route::post('/editproduct', [AdminController::class, 'editproduct']);
+=======
+    Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+    Route::post('/changePassword',[AdminController::class,'changePassword']);
+    Route::post('/updateProfile',[AdminController::class,'updateProfile']);
+    Route::post('/updateimage',[AdminController::class,'updateimage']);
+    
+>>>>>>> 3710efb45eb395dbbfd38ba1a0234e5a3eeac6be
 // });
 
 
@@ -57,20 +67,32 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('vieworder/{id}',[KitchenStaff::class,'vieworder']);
     Route::get('updateorder/{id}',[KitchenStaff::class,'updateorder']);
     Route::post('/UpdateOrderK',[KitchenStaff::class,'UpdateOrderK']);
+<<<<<<< HEAD
 
+=======
+    Route::get('/kprofile',[KitchenStaff::class,'profile'])->name('kprofile');
+    Route::post('/kchangePassword',[AdminController::class,'changePassword']);
+    Route::post('/kupdateProfile',[AdminController::class,'updateProfile']);
+    Route::post('/kupdateimage',[AdminController::class,'updateimage']);
+    
+>>>>>>> 3710efb45eb395dbbfd38ba1a0234e5a3eeac6be
 // });
 
 
 // Route::middleware(['auth', 'role:User'])->group(function () {
-    Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
-    Route::get('/corderbycustomer',[customerController::class,'corderbycustomer'])->name('mycart');
-    Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
-    Route::post('/editquantity',[customerController::class,'editquantity']);
-    Route::post('checkout',[customerController::class,'checkout']);
-    Route::post('checkoutgcash',[customerController::class,'checkoutgcash']);
-    Route::post('/finalcheck',[customerController::class,'finalcheck']);
-    Route::get('/myorder',[customerController::class,'myorder'])->name('myorder');
-    Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
+    // Route::get('/cdashbaord',[customerController::class,'dashboard'])->name('cdashbaord');
+    // Route::get('/corderbycustomer',[customerController::class,'corderbycustomer'])->name('mycart');
+    // Route::post('/addtocartItem',[customerController::class,'addtocartItem']);
+    // Route::post('/editquantity',[customerController::class,'editquantity']);
+    // Route::post('checkout',[customerController::class,'checkout']);
+    // Route::post('checkoutgcash',[customerController::class,'checkoutgcash']);
+    // Route::post('/finalcheck',[customerController::class,'finalcheck']);
+    // Route::get('/myorder',[customerController::class,'myorder'])->name('myorder');
+    // Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
+
+    Route::get('/menu',[customerController::class,'menu'])->name('menu');
+    
+ 
 // });
 
 
@@ -84,4 +106,11 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('vieworderss/{id}',[RiderController::class,'vieworder']);
     Route::get('/logout',[SystemLoad::class,'logout']);
     Route::post('/UpdateOrderKS',[RiderController::class,'UpdateOrderK']);
+<<<<<<< HEAD
 // });
+=======
+    Route::get('/rprofile',[RiderController::class,'profile'])->name('rprofile');
+    Route::post('/rchangePassword',[AdminController::class,'changePassword']);
+    Route::post('/rupdateProfile',[AdminController::class,'updateProfile']);
+    Route::post('/rupdateimage',[AdminController::class,'updateimage']);
+>>>>>>> 3710efb45eb395dbbfd38ba1a0234e5a3eeac6be

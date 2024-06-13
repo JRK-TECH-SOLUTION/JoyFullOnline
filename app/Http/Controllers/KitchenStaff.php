@@ -100,5 +100,58 @@ class KitchenStaff extends Controller
        //back with a message
         return back()->with('success', 'Order Updated');
     }
+    public function profile(){
+        //get the profile of the user
+        $profile= SystemUser::where('id', auth()->user()->id)->first();
+        return view('kitchenstaff.profile', compact('profile'));
+    }
+        
+        public function changePassword(Request $request){
+            $oldpassword = $request->oldpassword;
+            $NewPassword = $request->NewPassword;
+            $ConfirmPassword = $request->ConfirmPassword;
+            $id = auth()->user()->id;
+            $profile = SystemUser::find($id);
+            if (Hash::check($oldpassword, $profile->Password)) {
+                if ($NewPassword == $ConfirmPassword) {
+                    $profile->Password = Hash::make($NewPassword);
+                    $profile->save();
+                    return redirect()->back()->with('success', 'Password Changed Successfully');
+                } else {
+                    return redirect()->back()->with('error', 'New Password and Confirm Password does not match');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Old Password is incorrect');
+            }
+        
+
+
+        }
+        public function updateProfile(Request $request){
+            $id = auth()->user()->id;
+            $profile = SystemUser::find($id);
+            $profile->FullName = $request->FullName;
+            $profile->Email = $request->Email;
+            $profile->PhoneNumber = $request->PhoneNumber;
+            $profile->Address = $request->Address;
+            $profile->save();
+            return redirect()->back()->with('success', 'Profile Updated Successfully');
+
+        }
+        public function updateimage(Request $request){
+            $id = auth()->user()->id;
+            $profile_photo_path = $request->file('profile_photo_path');
+            $oldphoto = $request->oldphoto;
+            //save the new photo in public/upload and update the database
+            $fileName = uniqid() . '.' . $profile_photo_path->getClientOriginalExtension();
+            $profile_photo_path->storeAs('', $fileName, 'public_upload');
+            $publicUrl = asset($fileName);
+            $profile = SystemUser::find($id);
+            $profile->profile_photo_path = $publicUrl;
+            $profile->save();
+            return redirect()->back()->with('success', 'Profile Image Updated Successfully');
+
+
+        }
 
 }

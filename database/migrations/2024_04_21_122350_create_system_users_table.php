@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('VerificationCode')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('Status', ['Active', 'Inactive'])->default('Inactive');
+            $table->string('profile_photo_path')->nullable();
+            
             $table->rememberToken();
             $table->timestamps();
         });
