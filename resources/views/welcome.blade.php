@@ -6,31 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 
+  <!--
     - primary meta tags
   -->
   <title>JoyFull</title>
   <meta name="title" content="Grilli - Amazing & Delicious Food">
   <meta name="description" content="This is a Restaurant html template made by codewithsadee">
 
-  <!-- 
+  <!--
     - favicon
   -->
   <link rel="shortcut icon" href="{{asset('favicon.svg')}}" type="image/svg+xml">
 
-  <!-- 
+  <!--
     - google font link
   -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
 
-  <!-- 
+  <!--
     - custom css link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
 
-  <!-- 
+  <!--
     - preload images
   -->
   <link rel="preload" as="image" href="{{asset('images/logo.png')}}">
@@ -41,7 +41,7 @@
 
 <body id="top">
 
-  <!-- 
+  <!--
     - #PRELOADER
   -->
 
@@ -54,7 +54,7 @@
 
 
 
-  <!-- 
+  <!--
     - #TOP BAR
   -->
 
@@ -91,7 +91,7 @@
 
       <div class="separator"></div>
 
-      
+
 
     </div>
   </div>
@@ -100,7 +100,7 @@
 
 
 
-  <!-- 
+  <!--
     - #HEADER
   -->
 
@@ -139,9 +139,9 @@
             </a>
           </li>
 
-       
 
-         
+
+
           <li class="navbar-item">
             <a href="#footer" class="navbar-link hover-underline">
               <div class="separator"></div>
@@ -161,7 +161,7 @@
 
           <p class="body-4 navbar-text">Daily : 8.00 am to 10.00 pm</p>
 
-        
+
 
           <div class="separator"></div>
 
@@ -198,7 +198,7 @@
   <main>
     <article>
 
-      <!-- 
+      <!--
         - #HERO
       -->
 
@@ -291,7 +291,7 @@
           <ion-icon name="chevron-forward"></ion-icon>
         </button>
 
-        
+
 
       </section>
 
@@ -299,7 +299,7 @@
 
 
 
-      <!-- 
+      <!--
         - #SERVICE
       -->
 
@@ -310,7 +310,7 @@
 
           <h2 class="headline-1 section-title">We Offer Top Notch</h2>
 
-         
+
 
           <ul class="grid-list">
 
@@ -330,7 +330,7 @@
                     <a href="#">Appitizer</a>
                   </h3>
 
-                  
+
 
                 </div>
 
@@ -375,7 +375,7 @@
                     <a href="#">Main Course</a>
                   </h3>
 
-                 
+
 
                 </div>
 
@@ -396,17 +396,17 @@
 
 
 
-      <!-- 
+      <!--
         - #ABOUT
       -->
 
-      
 
 
 
 
 
-      <!-- 
+
+      <!--
         - #SPECIAL DISH
       -->
 
@@ -424,9 +424,9 @@
 
             <p class="section-subtitle label-2">Special Dish</p>
 
-            <h2 class="headline-1 section-title">Pinaupong Manok</h2>
+            <h2 class="headline-1 section-title">Turbong Manok</h2>
 
-        
+
 
             <a href="#" class="btn btn-primary">
               <span class="text text-1">Sign Up to Order</span>
@@ -447,7 +447,7 @@
 
 
 
-      <!-- 
+      <!--
         - #MENU
       -->
 
@@ -475,12 +475,12 @@
                       <a href="#" class="card-title">Pork Tonkatsu</a>
                     </h3>
 
-                    
+
 
                     <span class="span title-2">₱ 950.00 </span>
                   </div>
 
-                 
+
 
                 </div>
 
@@ -505,7 +505,7 @@
                     <span class="span title-2">₱ 950.00 </span>
                   </div>
 
-                
+
 
                 </div>
 
@@ -530,7 +530,7 @@
                     <span class="span title-2">₱ 850.00 </span>
                   </div>
 
-                 
+
                 </div>
 
               </div>
@@ -556,7 +556,7 @@
                     <span class="span title-2">₱ 170.00</span>
                   </div>
 
-                  
+
 
                 </div>
 
@@ -587,8 +587,8 @@
 
 
 
-    
-      <!-- 
+
+      <!--
         - #FEATURES
       -->
 
@@ -610,7 +610,6 @@
 
                 <h3 class="title-2 card-title">Hygienic Food</h3>
 
-                <p class="label-1 card-text">Lorem Ipsum is simply dummy printing and typesetting.</p>
 
               </div>
             </li>
@@ -624,7 +623,6 @@
 
                 <h3 class="title-2 card-title">Fresh Environment</h3>
 
-                <p class="label-1 card-text">Lorem Ipsum is simply dummy printing and typesetting.</p>
 
               </div>
             </li>
@@ -638,7 +636,6 @@
 
                 <h3 class="title-2 card-title">Skilled Chefs</h3>
 
-                <p class="label-1 card-text">Lorem Ipsum is simply dummy printing and typesetting.</p>
 
               </div>
             </li>
@@ -652,8 +649,7 @@
 
                 <h3 class="title-2 card-title">Event & Party</h3>
 
-                <p class="label-1 card-text">Lorem Ipsum is simply dummy printing and typesetting.</p>
-
+                
               </div>
             </li>
 
@@ -672,7 +668,7 @@
 
 
 
-      
+
 
     </article>
   </main>
@@ -681,7 +677,7 @@
 
 
 
-  <!-- 
+  <!--
     - #FOOTER
   -->
 
@@ -701,7 +697,7 @@
             211 R. TATCO ST. KALAWAAN PASIG CITY, Metro Manila, 1600
           </address>
 
-         
+
 
           <a href="tel:+88123123456" class="body-4 contact-link">☎️: 02-75014596 <br>
             📱: 0951 857 0961</a>
@@ -716,7 +712,7 @@
             <div class="separator"></div>
           </div>
 
-         
+
 
         </div>
 
@@ -772,7 +768,7 @@
 
       <div class="footer-bottom">
 
-        
+
 
       </div>
 
@@ -783,7 +779,7 @@
 
 
 
-  <!-- 
+  <!--
     - #BACK TO TOP
   -->
 
@@ -795,12 +791,12 @@
 
 
 
-  <!-- 
+  <!--
     - custom js link
   -->
   <script src="{{asset('assets/js/script.js')}}"></script>
 
-  <!-- 
+  <!--
     - ionicon link
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

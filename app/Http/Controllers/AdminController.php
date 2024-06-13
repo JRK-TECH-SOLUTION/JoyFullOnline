@@ -35,8 +35,8 @@ class AdminController extends Controller
         //select * the product order by quantity small to big
         $products = productinformation::orderBy('productquantity', 'asc')->get();
 
-        
-        
+
+
 
         //return
         return view('administrator.dashboard', compact('total', 'totalSales', 'totalSalesMonth', 'totalCustomer', 'products'));
@@ -106,6 +106,15 @@ class AdminController extends Controller
     public function product(){
         $products = productinformation::all();
         return view('administrator.product', compact('products'));
+    }
+    public function editproduct(Request $request){
+        $product = productinformation::where('id', $request->productid)->first();
+        $product->productprice = $request->productprice;
+        $product->productquantity = $request->productquantity;
+        $product->productstatus = $request->productstatus;
+        $product->save();
+        return redirect()->back()->with('success', 'Product updated successfully');
+
     }
     public function addProduct(Request $request){
 

@@ -57,10 +57,61 @@
                                                     <td>{{ $product->productcategory }}</td>
                                                     <td>{{ $product->productstatus }}</td>
                                                     <td>
-
+                                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#EditProduct{{ $product->id }}">Edit</button>
                                                         <button class="btn btn-danger btn-sm" onclick="deleteProduct(this)" data-id="{{ $product->id }}">Delete</button>
                                                     </td>
                                                 </tr>
+                                                <div class="modal fade" id="EditProduct{{ $product->id }}">
+                                                    <div class="modal-dialog modal-lg">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h4 class="modal-title">Add Product</h4>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                          <form action="editproduct" method="post" autocomplete="OFF" enctype="multipart/form-data">
+                                                            @csrf
+
+                                                                <input type="hidden" name="productid" value="{{ $product->id }}">
+                                                               
+
+                                                                <div class="form-group row">
+                                                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Product Price</label>
+                                                                    <div class="col-sm-9">
+                                                                    <input type="text" class="form-control" id="inputEmail3" name="productprice" value="{{ $product->productprice }}">
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Product Status</label>
+                                                                    <div class="col-sm-9">
+                                                                    <select class="form-control" name="productstatus">
+                                                                        <option value="Available">Available</option>
+                                                                        <option value="Not Available">Not Available</option>
+                                                                    </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Product Quantity</label>
+                                                                    <div class="col-sm-9">
+                                                                        <input type="text" class="form-control" id="inputEmail3" name="productquantity" value="{{ $product->productquantity }}">
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                        </div>
+                                                        <div class="modal-footer">
+
+                                                          <button type="submit" class="btn btn-primary float-right">Save Changes</button></form>
+                                                        </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                            </div>
                                             @endforeach
                                         @else
                                             <tr>

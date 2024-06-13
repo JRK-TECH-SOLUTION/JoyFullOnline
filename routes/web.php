@@ -43,6 +43,7 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('/customer', [AdminController::class, 'customer']);
     Route::get('/maintenance', [AdminController::class, 'maintenance']);
     Route::get('/delivery', [AdminController::class, 'delivery']);
+    Route::post('/editproduct', [AdminController::class, 'editproduct']);
 // });
 
 
@@ -56,7 +57,7 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('vieworder/{id}',[KitchenStaff::class,'vieworder']);
     Route::get('updateorder/{id}',[KitchenStaff::class,'updateorder']);
     Route::post('/UpdateOrderK',[KitchenStaff::class,'UpdateOrderK']);
-    
+
 // });
 
 
@@ -71,7 +72,7 @@ Route::post('verifyNumber', [SystemLoad::class, 'verifyNumber'])->name('verifyNu
     Route::get('/myorder',[customerController::class,'myorder'])->name('myorder');
     Route::get('/myorderdetails/{id}',[customerController::class,'myorderdetails'])->name('myorderview');
 // });
-  
+
 
 
 
